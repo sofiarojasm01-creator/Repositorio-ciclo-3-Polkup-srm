@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PolkUp landing page</title>
+    
+    <!-- Fuentes de Google (Poppins) con pesos optimizados -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Enlace a tu archivo de estilos CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- SECCIÓN 1: Hero Parallax con 10 Círculos de Colores y Estructura de Marca Centrada -->
+    <header class="hero-parallax">
+        <!-- Círculos decorativos de fondo -->
+        <div class="circle circle-1"></div>
+        <div class="circle circle-2"></div>
+        <div class="circle circle-3"></div>
+        <div class="circle circle-4"></div>
+        <div class="circle circle-5"></div>
+        <div class="circle circle-6"></div>
+        <div class="circle circle-7"></div>
+        <div class="circle circle-8"></div>
+        <div class="circle circle-9"></div>
+        <div class="circle circle-10"></div>
+        
+        <!-- CORRECCIÓN: Contenedor unificado (brand-container) con logo, título, eslogan y texto chico -->
+        <div class="brand-container">
+            <img src="logopolkupsfondo.png" alt="Logo de la página" class="main-logo">
+            
+            <p class="hero-slogan">Llevar tus dos varillas hasta la cima de la torre antes que los demás jugadores.</p>
+            <h1 class="hero-title">¿Qué es polkup?</h1>
+            <p class="hero-subtext">Polkup es un juego de mesa interactivo donde los jugadores compiten por ser los primeros en llegar a la cima de la torre.</p>
+        </div>
+    </header>
+
+    <!-- SECCIÓN 2: Galería de Fotos (Diseño Grid Limpio) -->
+    <section class="gallery-section">
+        <h2>Galería de Proyectos</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item"><img src="PolkUP_Imagen_P.png" alt="Foto 1"></div>
+            <div class="gallery-item"><img src="PolkUP_Imagen_P (1).png" alt="Foto 1"></div>
+            <div class="gallery-item"><img src="PolkUP_Imagen_P (2).png" alt="Foto 2"></div>
+            <div class="gallery-item"><img src="PolkUP_Imagen_P (3).png" alt="Foto 3"></div>
+            <div class="gallery-item"><img src="PolkUP_Imagen_P (4).png" alt="Foto 4"></div>
+            <div class="gallery-item"><img src="PolkUP_Imagen_P (5).png" alt="Foto 5"></div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 3: Bloques de Texto con GIFs de fondo (Máximo protagonismo al GIF) -->
+    <section class="gif-text-section">
+        
+        <!-- Concepto 1 -->
+        <div class="gif-block" style="--gif-url: url('polkup_dado_1.gif');">
+            <div class="text-content">
+                <h3>¿Cómo se juega?</h3>
+                <p>Cada jugador se ubica en la base de la torre, uno frente a otro, formando una cruz. <b>El jugador más alto comienza presionando el dado mecánico.</b></p>
+            </div>
+            </div>
+        </div>
+
+        <!-- Concepto 2 -->
+        <div class="gif-block" style="--gif-url: url('polkup_rotar_2.gif');">
+            <div class="text-content">
+                <h3>Estrategia de Movimiento</h3>
+                <p>Según el color obtenido, debe elegir el agujero de ese color que le resulte más cercano o estratégico. El jugador puede mover cualquiera de sus dos varas (delantera o trasera) hacia el nuevo agujero. En su turno, el jugador puede mover la base giratoria y las secciones de la torre hasta donde las cuerdas tensas lo permitan. <b>Al momento de insertar la vara, no podrá volver a tocar la torre hasta completar el movimiento.</p>
+            </div>
+        </div>
+
+        <!-- Concepto 3 -->
+        <div class="gif-block" style="--gif-url: url('polkup_cartas_3.gif');">
+            <div class="text-content">
+                <h3>Reglas y Caídas</h3>
+                <p>Siempre debe mantener al menos una vara anclada a la estructura. No puede tener ambas varas sin apoyo al mismo tiempo. Si un jugador cae en un agujero con borde negro, deberá sacar una carta y realizar la acción indicada. Si ambas varas se sueltan, se considera una caída y el jugador debe volver a comenzar desde la base de la torre. Una vez realizado el movimiento, el turno finaliza y continúa el siguiente jugador.</p>
+            </div>
+        </div>
+        
+        <!-- Concepto 4 (¡CORREGIDO! Ya no está atrapado en el bloque anterior) -->
+        <div class="gif-block" style="--gif-url: url('polkup_cima_4.gif');">
+            <div class="text-content">
+                <h3>¿Cómo se gana?</h3>
+                <p>Gana el jugador que sea el primero en llegar con sus dos varillas a la cima de la torre.</p>
+            </div>
+        </div>
+
+    </section>
+
+<!-- NUEVA SECCIÓN OSCURA DESPUÉS DE LOS GIFS -->
+    <section class="dark-footer-section">
+        <h2 class="dark-section-title">Interfaz Digital del juego Polkup</h2>
+        <p class="dark-section-text">Esta interfaz digital de Polkup propone una <b>exploración experimental</b> del juego, extrayendo sus principales rasgos y gestos para transformarlos en experiencias interactivas. A través de distintas dinámicas visuales y de interacción, <b>el usuario puede conocer y experimentar la esencia del juego desde una perspectiva digital.</p>
+    </section>
+    <!-- Enlace externo a tu JavaScript para el movimiento de los círculos -->
+    <script src="script.js"></script>
+</body>
+</html>
