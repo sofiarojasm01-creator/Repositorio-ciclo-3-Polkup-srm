@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Polkup - Laboratorio Experimental</title>
+    
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="experimental.css">
+</head>
+<body>
+
+    <section id="screen-menu" class="experimental-screen active">
+        <a href="index.html" class="back-to-landing">← Volver al inicio</a>
+
+        <div class="menu-experimental-container">
+            <button class="menu-btn btn-ancla" data-target="screen-ancla">
+                <span>a</span><span>n</span><span>c</span><span>l</span><span>a</span>
+            </button>
+            
+            <button class="menu-btn btn-rota" data-target="screen-rota">
+                <span>r</span><span>o</span><span>t</span><span>a</span>
+            </button>
+            
+            <button class="menu-btn btn-cima" data-target="screen-cima">
+                <span>l</span><span>l</span><span>e</span><span>g</span><span>a</span><span>&nbsp;</span>
+                <span>a</span><span>&nbsp;</span>
+                <span>l</span><span>a</span><span>&nbsp;</span>
+                <span>c</span><span>i</span><span>m</span><span>a</span>
+            </button>
+        </div>
+    </section>
+
+    <section id="screen-ancla" class="experimental-screen">
+        <button class="back-to-menu">← Volver al menú</button>
+        <div class="canvas-fullscreen-container">
+            <canvas id="canvasAncla"></canvas>
+        </div>
+    </section>
+
+    <section id="screen-rota" class="experimental-screen">
+        <button class="back-to-menu">← Volver al menú</button>
+        <div class="canvas-fullscreen-container">
+            <canvas id="canvasRota"></canvas>
+        </div>
+    </section>
+
+    <section id="screen-cima" class="experimental-screen">
+        <button class="back-to-menu">← Volver al menú</button>
+        <div class="canvas-fullscreen-container">
+            <canvas id="canvasCima"></canvas>
+        </div>
+    </section>
+
+    <script src="interaction-engine.js"></script>
+</body>
+</html>

@@ -1,0 +1,145 @@
+/* ====================================================
+   /* --- CONFIGURACIÓN BASE DEL LABORATORIO --- */
+
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff; /* Fondo blanco limpio como en tu Figma y la web de Bic Camera */
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden; /* Evita barras de scroll molestas */
+}
+
+/* Control de pantallas (Oculta las que no están activas) */
+.experimental-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none; /* Por defecto oculto */
+    background-color: #ffffff;
+    box-sizing: border-box;
+    padding: 40px;
+}
+
+/* Pantalla que se está mostrando actualmente */
+.experimental-screen.active {
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- BOTONES DE NAVEGACIÓN --- */
+.back-to-landing, .back-to-menu {
+    position: absolute;
+    top: 30px;
+    left: 40px;
+    background: none;
+    border: none;
+    color: #333333;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    opacity: 0.6;
+    transition: opacity 0.2s ease;
+    z-index: 10;
+}
+
+.back-to-landing:hover, .back-to-menu:hover {
+    opacity: 1;
+}
+
+/* ====================================================
+   /* --- ESTILOS DEL MENÚ PRINCIPAL (OPACIDAD CRUZADA) --- */
+
+#screen-menu {
+    justify-content: center;
+    align-items: center;
+}
+
+.menu-experimental-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 60px;
+}
+
+/* Estilo base para las 3 opciones */
+.menu-btn {
+    background: none;
+    border: none;
+    font-family: 'Bauhaus 93', 'Arial Black', sans-serif;
+    font-size: 3.5rem;
+    color: #cccccc; /* Gris apagado por defecto */
+    cursor: pointer;
+    padding: 10px;
+    transition: opacity 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+/* EFECTO INTERACTIVO DE OPACIDAD CRUZADA (Efecto Figma) */
+/* Cuando el mouse entra al contenedor, TODOS bajan su opacidad... */
+.menu-experimental-container:hover .menu-btn {
+    opacity: 0.15; /* Lo bajé un poquito más para que resalte mucho más el activo */
+}
+
+/* ...EXCEPTO al que se le está haciendo hovering directo, que recupera fuerza y se transforma */
+.menu-experimental-container .menu-btn:hover {
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+/* ====================================================
+   /* --- SISTEMA ARCOÍRIS UNIFICADO PARA TODO EL MENÚ --- */
+
+
+/* Apaga el color gris base de todas las letras cuando el botón entra en hover */
+.menu-btn:hover {
+    color: transparent !important;
+}
+
+/* Al hacer hover sobre cualquier botón, las letras se activan en bucle con los 4 colores */
+.menu-btn span {
+    display: inline-block;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+/* Letras 1, 5, 9, 13... -> ROJO */
+.menu-btn:hover span:nth-child(4n+1) {
+    color: #EC2828;
+}
+
+/* Letras 2, 6, 10, 14... -> AMARILLO */
+.menu-btn:hover span:nth-child(4n+2) {
+    color: #EDC217;
+}
+
+/* Letras 3, 7, 11, 15... -> AZUL */
+.menu-btn:hover span:nth-child(4n+3) {
+    color: #3329ED;
+}
+
+/* Letras 4, 8, 12, 16... -> VERDE */
+.menu-btn:hover span:nth-child(4n+4) {
+    color: #0DB500;
+}
+
+/* --- CONTENEDOR DE LOS LIENZOS EXPERIMENTALES (PANTALLA COMPLETA ABSOLUTA) --- */
+.canvas-fullscreen-container {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    z-index: 1; /* Queda detrás del botón de volver */
+}
+
+canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
