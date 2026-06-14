@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    
 
     <!-- SECCIÓN 1: Hero Parallax con 10 Círculos de Colores y Estructura de Marca Centrada -->
     <header class="hero-parallax">
@@ -38,25 +39,47 @@
     </header>
 
     
-    <section class="que-es-polkup-section" style="margin-top: 120px; margin-bottom: 140px; text-align: center; width: 100%;">
-        <h2 style="font-family: 'Bauhaus 93', sans-serif; font-size: 3.5rem; margin-bottom: 25px;">¿Qué es polkup?</h2>
-        <p style="font-family: 'Poppins', sans-serif; font-size: 1.2rem; font-weight: 300; max-width: 650px; margin: 0 auto; line-height: 1.7; opacity: 0.8;">
+   <section class="que-es-polkup-section-simple">
+    <div class="polkup-content-simple">
+        <h2>¿Qué es Polkup?</h2>
+        <p>
             Polkup es un juego de mesa interactivo donde los jugadores compiten por ser los primeros en llegar a la cima de la torre.
         </p>
-    </section>
+    </div>
+</section>
+   
+   <section class="interactive-gallery-section">
+    <h2>Componentes del Juego</h2>
 
-    <!-- SECCIÓN 2: Galería de Fotos (Diseño Grid Limpio) -->
-    <section class="gallery-section">
-        <h2>Galería de Imágenes</h2>
-        <div class="gallery-grid">
-            <div class="gallery-item"><img src="assets/PolkUP_Imagen_P.png" alt="Foto 1"></div>
-            <div class="gallery-item"><img src="assets/PolkUP_Imagen_P (1).png" alt="Foto 1"></div>
-            <div class="gallery-item"><img src="assets/PolkUP_Imagen_P (2).png" alt="Foto 2"></div>
-            <div class="gallery-item"><img src="assets/PolkUP_Imagen_P (3).png" alt="Foto 3"></div>
-            <div class="gallery-item"><img src="assets/PolkUP_Imagen_P (4).png" alt="Foto 4"></div>
-            <div class="gallery-item"><img src="assets/PolkUP_Imagen_P (5).png" alt="Foto 5"></div>
+    <div class="gallery-wrapper">
+        <div class="main-display">
+            <img id="activeLargeImg" src="assets/Polkup_imagen_estructura (1).png" alt="Componente Activo">
+            <p id="activeCaption" class="gallery-caption">Estructura final del juego Polkup.</p>
         </div>
-    </section>
+
+        <div class="thumbnails-grid">
+            <div class="thumb-item active" data-large="assets/Polkup_imagen_estructura (1).png" data-caption="Estructura final del juego Polkup.">
+                <img src="assets/Polkup_imagen_estructura (1).png" alt="Miniatura 1">
+            </div>
+            <div class="thumb-item" data-large="assets/Polkup_imagen_caja.png" data-caption="Caja del juego Polkup, donde se almacenan y organizan las piezas que componen el juego.">
+                <img src="assets/Polkup_imagen_caja.png" alt="Miniatura 2">
+            </div>
+            <div class="thumb-item" data-large="assets/Polkup_imagen_cartas.png" data-caption="Cartas del juego Polkup con iconografía oficial.">
+                <img src="assets/Polkup_imagen_cartas.png" alt="Miniatura 3">
+            </div>
+            <div class="thumb-item" data-large="assets/Polkup_imagen_dado.png" data-caption="Dado mecánico del juego Polkup.">
+                <img src="assets/Polkup_imagen_dado.png" alt="Miniatura 4">
+            </div>
+            <div class="thumb-item" data-large="assets/Polkup_imagen_varas.png" data-caption="Varas de cuatro colores unidas por cuerdas, utilizadas para subir por la torre.">
+                <img src="assets/Polkup_imagen_varas.png" alt="Miniatura 5">
+            </div>
+            <div class="thumb-item" data-large="assets/Polkup_imagen_mesa.png" data-caption="Mesa giratoria con divisiones de cuatro colores.">
+                <img src="assets/Polkup_imagen_mesa.png" alt="Miniatura 6">
+            </div>
+        </div>
+    </div>
+</section>
+
 
     <!-- SECCIÓN 3: Bloques de Texto con GIFs de fondo (Máximo protagonismo al GIF) -->
     <section class="gif-text-section">
@@ -135,7 +158,7 @@ De esta manera, la propuesta digital se construye en torno a las diferentes posi
     <span>E</span><span>x</span><span>p</span><span>l</span><span>o</span><span>r</span><span>a</span><span>&nbsp;</span>
     <span>l</span><span>a</span><span>&nbsp;</span>
     <span>e</span><span>x</span><span>p</span><span>e</span><span>r</span><span>i</span><span>e</span><span>n</span><span>c</span><span>i</span><span>a</span><span>&nbsp;</span>
-    <span>a</span><span>q</span><span>u</span><span>í</span><span>
+    <span>a</span><span>q</span><span>u</span><span>í</span>
 </p>
 <div class="image-button-container">
             <a href="experimental.html" class="img-btn-link">

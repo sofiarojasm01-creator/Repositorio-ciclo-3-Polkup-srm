@@ -9,6 +9,16 @@
 }
 
 /* --- REGLAS GENERALES --- */
+
+
+/* 🌟 COMPENSACIÓN DE NAVBAR EN EL BODY */
+/* Como el menú es fijo (fixed), flota sobre la página y taparía los primeros 70px del Hero. 
+   Con esta regla hacemos que el comportamiento del scroll sea ultrasuave de forma nativa */
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 70px; /* Evita que el navbar tape los títulos al clickear un enlace */
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -22,7 +32,7 @@ body {
     overflow-x: hidden;
 }
 
-/* Tipografía Bauhaus para todos los títulos */
+/* Tipografía Bauhaus para todos los títulos globales */
 h1, h2, h3 {
     font-family: 'Bauhaus 93', 'Arial Black', sans-serif; 
     color: var(--color-texto-oscuro);
@@ -41,12 +51,11 @@ h1, h2, h3 {
     background-color: var(--color-fondo);
 }
 
-/* Contenedor central de marca (PERFECTAMENTE CENTRADO EN LA PÁGINA) */
 .brand-container {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); /* Este truco lo centra perfectamente de arriba-abajo e izquierda-derecha */
+    transform: translate(-50%, -50%);
     z-index: 99; 
     text-align: center;
     display: flex;
@@ -54,11 +63,10 @@ h1, h2, h3 {
     align-items: center;
     gap: 15px; 
     width: 100%;
-    max-width: 650px; /* Evita que el texto se deforme */
+    max-width: 650px;
     padding: 0 20px;
 }
 
-/* Logo */
 .main-logo {
     width: 100%;
     max-width: 580px; 
@@ -67,28 +75,22 @@ h1, h2, h3 {
     filter: drop-shadow(0px 12px 24px rgba(0, 0, 0, 0.12)); 
 }
 
-/* Título principal en la cabecera */
 .hero-title {
     font-size: 3.5rem;
-    color: var(--color-texto-oscuro);
     line-height: 1.1;
     margin-bottom: 5px;
 }
 
-/* Estilo para el eslogan */
 .hero-slogan {
     font-size: 1.3rem;
     font-weight: 600;
-    color: var(--color-texto-oscuro); 
     letter-spacing: 1px;
     text-transform: uppercase; 
 }
 
-/* Texto chico inferior de la cabecera */
 .hero-subtext {
     font-size: 1rem;
     font-weight: 300;
-    color: var(--color-texto-oscuro);
     max-width: 520px;
     line-height: 1.6;
 }
@@ -100,7 +102,7 @@ h1, h2, h3 {
     opacity: 0.55; 
     filter: blur(12px); 
     will-change: transform;
-    z-index: 1; /* Capa baja, permitiendo que la marca (z-index: 99) pase por el frente */
+    z-index: 1;
 }
 
 .circle-1  { width: 140px; height: 140px; top: 12%; left: 7%;  background-color: var(--color-verde); }
@@ -114,52 +116,140 @@ h1, h2, h3 {
 .circle-9  { width: 150px; height: 150px; bottom: 18%; left: 45%; background-color: var(--color-rojo); }
 .circle-10 { width: 270px; height: 270px; top: 42%; left: 22%; background-color: var(--color-verde); }
 
-/* --- SECCIÓN 2: GALERÍA DE FOTOS --- */
-.gallery-section {
-    padding: 120px 40px;
-    text-align: center;
-    background-color: var(--color-fondo); 
+/* --- SECCIÓN 2: ¿QUÉ ES POLKUP? (CENTRADA) --- */
+.que-es-polkup-section-simple {
+    width: 100%;
+    padding: 120px 20px 80px 20px; 
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    box-sizing: border-box;
+    position: relative;
+    z-index: 1; /* Plano inferior */
 }
 
-.gallery-section h2 {
+.polkup-content-simple {
+    max-width: 850px; 
+    text-align: center; 
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+}
+
+.polkup-content-simple h2 {
+    font-size: 4.5rem; 
+    margin-bottom: 30px;
+}
+
+.polkup-content-simple p {
+    font-family: 'Poppins', sans-serif; 
+    font-size: 1.45rem; 
+    font-weight: 300; 
+    line-height: 1.9; 
+    color: #555555;
+    max-width: 750px; 
+}
+
+/* --- SECCIÓN 3: GALERÍA DE VISOR PRINCIPAL Y MINIATURAS --- */
+.interactive-gallery-section {
+    padding: 80px 0;
+    background-color: #ffffff;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 1; /* Plano inferior junto al texto intro */
+}
+
+.interactive-gallery-section h2 {
     font-size: 3rem;
-    margin-bottom: 60px;
+    margin-bottom: 40px;
+    text-align: center;
 }
 
-.gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
-    max-width: 1200px;
-    margin: 0 auto;
+.gallery-wrapper {
+    width: 100%;
+    max-width: 950px; 
+    padding: 0 20px;
+    box-sizing: border-box;
 }
 
-.gallery-item {
+.main-display {
+    width: 100%;
+    height: 500px; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.main-display img {
+    width: 100%;
+    height: 90%;
+    object-fit: contain; 
+    transition: opacity 0.25s ease;
+}
+
+.gallery-caption {
+    height: 10%;
+    margin-top: 15px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 300; 
+    color: #555555;
+    text-align: center;
+    max-width: 650px; 
+    line-height: 1.5;
+}
+
+.thumbnails-grid {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    width: 100%;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.thumb-item {
+    width: 110px;
+    height: 80px;
+    border-radius: 12px;
     overflow: hidden;
-    border-radius: 20px;
-    height: 380px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
-    background: #f5f5f5;
+    cursor: pointer;
+    border: 3px solid transparent;
+    transition: all 0.25s ease;
+    opacity: 0.5;
 }
 
-.gallery-item img {
+.thumb-item img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-.gallery-item:hover img {
-    transform: scale(1.06);
+.thumb-item.active {
+    border-color: #333333; 
+    opacity: 1;
+    transform: scale(1.05);
 }
 
-/* --- SECCIÓN 3: TEXTO CON GIFS (INTERACTIVIDAD HOVER) --- */
+.thumb-item:hover {
+    opacity: 0.9;
+}
+
+/* --- SECCIÓN 4: TEXTO CON GIFS (INTERACTIVIDAD HOVER) --- */
 .gif-text-section {
     padding: 60px 0 120px 0;
     background-color: var(--color-fondo);
     display: flex;
     flex-direction: column;
-    gap: 60px; /* AQUÍ SE CONTROLA EL MARGEN ENTRE LOS GIFS */
+    gap: 60px; 
+    position: relative;
+    z-index: 1;
 }
 
 .gif-block {
@@ -167,7 +257,7 @@ h1, h2, h3 {
     height: 65vh;
     width: 90%; 
     max-width: 1200px;
-    margin: 0 auto; 
+    margin: 0 auto 50px auto; 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -175,40 +265,32 @@ h1, h2, h3 {
     padding: 40px;
     overflow: hidden;
     border-radius: 24px; 
-    
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15); 
     border: 1px solid rgba(0, 0, 0, 0.04); 
-
     background-image: var(--gif-url);
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     cursor: pointer;
-
-    /* AGREGA ESTA LÍNEA PARA SEPARAR EL BORDE REDONDEADO DEL SIGUIENTE BLOQUE */
-    margin-bottom: 50px; 
 }
 
-/* Capa blanca con OPACIDAD DEL 95% para una lectura perfecta */
 .gif-block::before {
     content: '';
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(255, 255, 255, 0.95); /* 95% de color blanco sólido */
+    background: rgba(255, 255, 255, 0.95); 
     z-index: 1;
-    transition: opacity 0.5s ease; /* Hace que la desaparición de la capa blanca sea suave */
+    transition: opacity 0.5s ease; 
 }
 
-/* Contenedor del texto */
 .text-content {
     position: relative;
     z-index: 2;
     max-width: 700px;
-    transition: opacity 0.4s ease; /* Hace que el texto se desvanezca suavemente */
+    transition: opacity 0.4s ease; 
 }
 
-/* Como ahora el fondo es blanco al 95%, volvemos los textos a tu color oscuro #333333 */
 .text-content h3 {
     font-size: 2.8rem;
     margin-bottom: 20px;
@@ -222,52 +304,43 @@ h1, h2, h3 {
     color: var(--color-texto-oscuro) !important; 
 }
 
-/* ====================================================
-   EFECTO HOVER: CUANDO EL CURSOR PASA POR ENCIMA (MOUSE OVER)
-   ==================================================== */
-
-/* 1. La capa blanca pasa a opacidad 0 (desaparece) */
-.gif-block:hover::before {
-    opacity: 0;
-}
-
-/* 2. El texto dentro del bloque pasa a opacidad 0 (se oculta) */
+.gif-block:hover::before,
 .gif-block:hover .text-content {
     opacity: 0;
 }
 
-/* --- NUEVA ESTRUCTURA OSCURA UNIFICADA --- */
+/* ====================================================
+   NUEVA ESTRUCTURA OSCURA UNIFICADA (EFECTO CORTINA SUPERPUESTA)
+   ==================================================== */
 .dark-footer-container {
     position: relative;
     width: 100%;
-    margin-top: 100px; /* Separación con los GIFs de arriba */
+    margin-top: 100px; 
+    z-index: 10; /* Eleva la placa para pisar las secciones blancas */
+    box-shadow: 0 -20px 40px rgba(0, 0, 0, 0.25); 
 }
 
-/* La tapa del arco que conecta el fondo blanco con el gris oscuro */
 .dark-arc-top {
     position: absolute;
-    top: -148px; /* Lo pega arriba del contenedor gris */
+    top: -148px; 
     left: 0;
     width: 100%;
     height: 150px;
     display: block;
-    z-index: 1;
+    z-index: 11; 
 }
 
-/* El cuerpo gris sólido que crece de forma infinita según el texto */
 .dark-footer-body {
-    background-color: #333333; /* El fondo gris oscuro continuo */
+    background-color: #333333; 
     width: 100%;
-    padding: 20px 20px 120px 20px; /* Espacio interno. Puedes subir el 120px final si agregas más cosas */
+    padding: 20px 20px 120px 20px; 
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centra los bloques de contenido principales */
-    gap: 40px; /* Separación uniforme entre bloques */
+    align-items: center; 
+    gap: 40px; 
 }
 
-/* --- BLOQUE CENTRADO --- */
 .dark-section-title {
-    font-family: 'Bauhaus 93', 'Arial Black', sans-serif;
     font-size: 3rem;
     color: #ffffff !important;
     text-align: center;
@@ -285,20 +358,20 @@ h1, h2, h3 {
     opacity: 0.95;
 }
 
-/* --- CONTENEDOR ALINEADO BIEN A LA IZQUIERDA --- */
+/* --- BLOQUE IZQUIERDO --- */
 .left-content-block {
     width: 100%;
-    max-width: 1000px; /* Al aumentar el ancho máximo, permitimos que se estire más hacia los lados */
+    max-width: 1000px; 
     text-align: left;
     margin-top: 20px;
-    padding-left: 10%; /* TRUCO: Lo empuja de forma elegante cerca del margen izquierdo (ajustable) */
-    align-self: flex-start; /* Rompe definitivamente el centrado de la caja madre y la tira a la izquierda */
+    padding-left: 10%; 
+    align-self: flex-start; 
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
+
 .left-subtitle {
-    font-family: 'Bauhaus 93', 'Arial Black', sans-serif; /* Lo cambié a Bauhaus para que combine con el título principal */
     font-size: 2.5rem;
     color: #ffffff !important;
     margin-bottom: 5px;
@@ -313,18 +386,17 @@ h1, h2, h3 {
     opacity: 0.85;
 }
 
-/* --- CONTENEDOR DE CÍRCULOS INTERACTIVOS --- */
+/* --- CÍRCULOS INTERACTIVOS --- */
 .color-circles-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 30px; /* Más espacio entre ellos */
+    gap: 30px; 
     width: 100%;
     margin-top: 20px;
-    margin-bottom: 40px; /* Espacio por si pones más cosas debajo */
+    margin-bottom: 40px; 
 }
 
-/* Círculos MÁS GRANDES (Cambiados de 60px a 85px) */
 .color-circle {
     width: 85px; 
     height: 85px;
@@ -339,94 +411,74 @@ h1, h2, h3 {
     transform: scale(1.08);
 }
 
-/* Colores interactivos (Hover) */
 .circle-red:hover    { background-color: #EC2828; }
 .circle-yellow:hover { background-color: #EDC217; }
 .circle-blue:hover   { background-color: #3329ED; }
 .circle-green:hover  { background-color: #0DB500; }
 
-/* --- TEXTO CON EFECTO ARCOÍRIS AL PASAR EL CURSOR --- */
+/* --- TEXTO ARCOÍRIS --- */
 .rainbow-text {
-    font-family: 'Bauhaus 93', 'Arial Black', sans-serif;
-    font-size: 3rem; /* Tamaño grande idéntico a tus títulos */
-    color: #ffffff;  /* Color blanco inicial estático */
+    font-size: 3rem; 
+    color: #ffffff;  
     text-align: center;
     width: 100%;
-    margin-top: 60px;   /* Separación con los círculos de arriba */
-    margin-bottom: 20px; /* Separación con el botón de abajo */
+    margin-top: 60px;   
+    margin-bottom: 20px; 
     cursor: default;
-    user-select: none; /* Evita que se seleccione el texto por accidente al pasar el mouse rápido */
+    user-select: none; 
 }
 
-/* Base para cada letra de la frase */
 .rainbow-text span {
     display: inline-block;
-    transition: color 0.2s ease, transform 0.2s ease; /* Transición ultrasuave al prender y apagar */
+    transition: color 0.2s ease, transform 0.2s ease; 
 }
 
-/* Efecto extra: la letra se levanta ligeramente al "prenderse" */
 .rainbow-text span:hover {
     transform: translateY(-4px);
 }
 
-/* ====================================================
-   ASIGNACIÓN CICLADA DE COLORES CORPORATIVOS
-   ==================================================== */
+.rainbow-text span:nth-child(4n+1):hover { color: #EC2828; }
+.rainbow-text span:nth-child(4n+2):hover { color: #EDC217; }
+.rainbow-text span:nth-child(4n+3):hover { color: #3329ED; }
+.rainbow-text span:nth-child(4n+4):hover { color: #0DB500; }
 
-/* Letras 1, 5, 9, 13, 17, 21... -> ROJO */
-.rainbow-text span:nth-child(4n+1):hover {
-    color: #EC2828;
-}
-
-/* Letras 2, 6, 10, 14, 18, 22... -> AMARILLO */
-.rainbow-text span:nth-child(4n+2):hover {
-    color: #EDC217;
-}
-
-/* Letras 3, 7, 11, 15, 19, 23... -> AZUL */
-.rainbow-text span:nth-child(4n+3):hover {
-    color: #3329ED;
-}
-
-/* Letras 4, 8, 12, 16, 20, 24... -> VERDE */
-.rainbow-text span:nth-child(4n+4):hover {
-    color: #0DB500;
-}
-
-
-/* --- CONTENEDOR DEL BOTÓN IMAGEN --- */
+/* --- BOTÓN INTERACTIVO DE IMAGEN --- */
 .image-button-container {
     display: flex;
-    justify-content: center; /* Centra el botón horizontalmente */
+    justify-content: center; 
     align-items: center;
     width: 100%;
-    margin-top: 50px; /* Separación respecto a los círculos de arriba */
-    margin-bottom: 20px; /* Margen final de la página */
+    margin-top: 50px; 
+    margin-bottom: 20px; 
 }
 
-/* Estilos base de la imagen del botón */
 .interactive-btn-img {
-    max-width: 200px; /* Ajusta este valor en píxeles si quieres que el botón sea más grande o más chico */
+    max-width: 200px; 
     height: auto;
     cursor: pointer;
     display: block;
-    
-    /* CONTROL DE TRANSICIÓN: Hace que el cambio de tamaño y opacidad sea ultrasuave */
     transition: transform 0.3s ease, opacity 0.3s ease; 
 }
 
-/* ====================================================
-   EFECTO HOVER: Al pasar el cursor por encima
-   ==================================================== */
 .interactive-btn-img:hover {
-    opacity: 0.7; /* Baja la opacidad (1 es sólida, 0 es invisible) */
-    transform: scale(0.92); /* Lo achica un 8% respecto a su tamaño original */
+    opacity: 0.7; 
+    transform: scale(0.92); 
 }
 
-/* ====================================================
-   EFECTO ACTIVE: Al hacer clic/apretar el botón
-   ==================================================== */
 .interactive-btn-img:active {
-    transform: scale(0.88); /* Se achica un poco más al presionarlo para simular un "clic" real */
+    transform: scale(0.88); 
     opacity: 0.6;
+}
+/* --- TEXTO ARCOÍRIS --- */
+.rainbow-text {
+    font-family: 'Bauhaus 93', 'Arial Black', sans-serif; /* 🌟 Agrega la tipografía Bauhaus */
+    font-size: 3.8rem; /* 🌟 Aumentado de 3rem a 3.8rem para que sea más grande */
+    color: #ffffff;  
+    text-align: center;
+    width: 100%;
+    margin-top: 60px;   
+    margin-bottom: 20px; 
+    letter-spacing: 1px; /* Mantiene la consistencia de espacio con los otros títulos */
+    cursor: default;
+    user-select: none; 
 }
