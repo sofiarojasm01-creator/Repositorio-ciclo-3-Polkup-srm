@@ -15,45 +15,75 @@ window.addEventListener('scroll', () => {
     });
 });
 
-/* ====================================================
-   MOTOR INTERACTIVO DE MINIATURAS (CORREGIDO)
-   ==================================================== */
-function initThumbnailGallery() {
-    const thumbnails = document.querySelectorAll('.thumb-item');
-    const mainImg = document.getElementById('activeLargeImg');
-    const mainCaption = document.getElementById('activeCaption');
+// --- EFECTO DE APARICIÓN AL HACER SCROLL (SCROLL REVEAL) ---
+document.addEventListener('DOMContentLoaded', () => {
+    const revealElements = document.querySelectorAll('.reveal');
 
-    // Validación para evitar errores si no encuentra los elementos
-    if (thumbnails.length === 0 || !mainImg || !mainCaption) return;
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('revealed');
 
-    thumbnails.forEach(thumb => {
-        thumb.addEventListener('click', () => {
-            // 1. Quitamos la clase 'active' de la miniatura anterior
-            document.querySelector('.thumb-item.active')?.classList.remove('active');
+                // Si el elemento es el texto arcoíris, iniciamos la secuencia
+                if (entry.target.classList.contains('rainbow-text')) {
+                    startRainbowSequence();
+                }
 
-            // 2. Le ponemos la clase 'active' a la miniatura que tocamos
-            thumb.classList.add('active');
-
-            // Extraemos los datos del atributo data-
-            const newSrc = thumb.getAttribute('data-large');
-            const newCaption = thumb.getAttribute('data-caption');
-
-            // 3. Cambiamos la imagen grande y el texto con un pestañeo suave
-            mainImg.style.opacity = '0';
-            
-            setTimeout(() => {
-                mainImg.src = newSrc;
-                mainCaption.textContent = newCaption;
-                mainImg.style.opacity = '1';
-            }, 200); // 200 milisegundos de transición
+                // Dejamos de observar una vez revelado para optimizar rendimiento
+                observer.unobserve(entry.target);
+            }
         });
+    }, {
+        threshold: 0.15, // Se activa cuando el 15% del elemento entra en pantalla
+        rootMargin: '0px 0px -50px 0px' // Offset para dispararse de manera natural
     });
+
+    revealElements.forEach(element => {
+        revealObserver.observe(element);
+    });
+
+    // --- EFECTO DE SEGUIMIENTO DEL MOUSE PARA EL BOTÓN PERSONALIZADO (LUPA INTERNA) ---
+    const customBtn = document.querySelector('.custom-interactive-btn');
+    if (customBtn) {
+        const glow = customBtn.querySelector('.btn-inner-glow');
+        customBtn.addEventListener('mousemove', (e) => {
+            const rect = customBtn.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            glow.style.left = `${x}px`;
+            glow.style.top = `${y}px`;
+        });
+        
+        // Resetear al centro al salir del botón
+        customBtn.addEventListener('mouseleave', () => {
+            glow.style.left = '50%';
+            glow.style.top = '50%';
+        });
+    }
+});
+
+// --- SECUENCIA DE SALTO ARCOÍRIS CON RETARDO DE 5 SEGUNDOS ---
+function startRainbowSequence() {
+    const spans = document.querySelectorAll('.rainbow-text span');
+    const delayBetweenLetters = 70; // Tiempo en ms entre el salto de cada letra
+    const animationDuration = 800;  // Duración de la animación CSS (0.8s) en ms
+    const pauseDuration = 5000;     // Pausa de 5 segundos al final de la cadena
+
+    spans.forEach((span, index) => {
+        setTimeout(() => {
+            span.classList.add('jump-color');
+            // Removemos la clase después de terminar la animación individual
+            setTimeout(() => {
+                span.classList.remove('jump-color');
+            }, animationDuration);
+        }, index * delayBetweenLetters);
+    });
+
+    // Tiempo total que toma completar toda la secuencia de la frase
+    const totalSequenceDuration = (spans.length * delayBetweenLetters) + animationDuration;
+
+    // Volver a llamar a la secuencia después de completar la frase + 5 segundos
+    setTimeout(startRainbowSequence, totalSequenceDuration + pauseDuration);
 }
 
-/* ====================================================
-   ACTIVADOR DE FUNCIONES (¡AQUÍ ESTABA EL ERROR!)
-   ==================================================== */
-// Esperamos a que todo el HTML de la página esté cargado para encender la galería
-document.addEventListener('DOMContentLoaded', () => {
-    initThumbnailGallery();
-});
+

@@ -3,22 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PolkUp landing page</title>
+    <title>PolkUp | El Juego de la Torre</title>
     
-    <!-- Fuentes de Google (Poppins) con pesos optimizados -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-
-    <!-- Enlace a tu archivo de estilos CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
 
-    <!-- SECCIÓN 1: Hero Parallax con 10 Círculos de Colores y Estructura de Marca Centrada -->
-    <header class="hero-parallax">
-        <!-- Círculos decorativos de fondo -->
+    <!-- Menú de Navegación Fijo (Header) -->
+    <nav class="nav-header">
+        <div class="nav-container">
+            <a href="#inicio" class="nav-brand">
+                <img src="assets/logopolkupsfondo.png" alt="PolkUp" class="nav-brand-logo">
+            </a>
+            <ul class="nav-links">
+                <li><a href="#concepto">Concepto</a></li>
+                <li><a href="#anatomia">Componentes</a></li>
+                <li><a href="#mecanicas">Cómo se juega</a></li>
+                <li><a href="#experimental">Digital</a></li>
+                <li><a href="experimental.html" class="nav-btn">Ver Experiencia</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header id="inicio" class="hero-parallax">
         <div class="circle circle-1"></div>
         <div class="circle circle-2"></div>
         <div class="circle circle-3"></div>
@@ -30,149 +40,249 @@
         <div class="circle circle-9"></div>
         <div class="circle circle-10"></div>
         
-        <!-- CORRECCIÓN: Contenedor unificado (brand-container) con logo, título, eslogan y texto chico -->
         <div class="brand-container">
-            <img src="assets/logopolkupsfondo.png" alt="logopolkupsfondo.png" class="main-logo">
-            
-            <p class="hero-slogan">Llevar tus dos varillas hasta la cima de la torre antes que los demás jugadores.</p>
+            <img src="assets/logopolkupsfondo.png" alt="Logo PolkUp" class="main-logo">
+            <p class="hero-slogan">Lleva tus dos varillas hasta la cima antes que los demás.</p>
+            <a href="experimental.html" class="hero-btn">Para entrar a la experiencia aquí</a>
         </div>
     </header>
 
+    <section id="concepto" class="que-es-polkup-section-simple">
+        <div class="polkup-content-simple reveal">
+            <span class="pre-title-blue">EL CONCEPTO</span>
+            <h2>¿Qué es Polkup?</h2>
+            <p>
+                Polkup es un juego de mesa interactivo donde los jugadores compiten por ser los primeros en llegar a la cima de la torre.
+            </p>
+        </div>
+    </section>
     
-   <section class="que-es-polkup-section-simple">
-    <div class="polkup-content-simple">
-        <h2>¿Qué es Polkup?</h2>
-        <p>
-            Polkup es un juego de mesa interactivo donde los jugadores compiten por ser los primeros en llegar a la cima de la torre.
-        </p>
-    </div>
-</section>
-   
-   <section class="interactive-gallery-section">
-    <h2>Componentes del Juego</h2>
+    <section id="anatomia" class="interactive-gallery-section">
+        <span class="pre-title-green reveal">ANATOMÍA DEL JUEGO</span>
+        <h2 class="reveal">Componentes del Juego</h2>
 
-    <div class="gallery-wrapper">
-        <div class="main-display">
-            <img id="activeLargeImg" src="assets/Polkup_imagen_estructura (1).png" alt="Componente Activo">
-            <p id="activeCaption" class="gallery-caption">Estructura final del juego Polkup.</p>
-        </div>
-
-        <div class="thumbnails-grid">
-            <div class="thumb-item active" data-large="assets/Polkup_imagen_estructura (1).png" data-caption="Estructura final del juego Polkup.">
-                <img src="assets/Polkup_imagen_estructura (1).png" alt="Miniatura 1">
+        <div class="accordion-gallery reveal">
+            <div class="accordion-item" style="--bg-img: url('assets/Polkup_imagen_estructura (1).png');">
+                <div class="accordion-content">
+                    <h3>Estructura</h3>
+                    <p>Estructura final del juego Polkup.</p>
+                </div>
             </div>
-            <div class="thumb-item" data-large="assets/Polkup_imagen_caja.png" data-caption="Caja del juego Polkup, donde se almacenan y organizan las piezas que componen el juego.">
-                <img src="assets/Polkup_imagen_caja.png" alt="Miniatura 2">
+            <div class="accordion-item" style="--bg-img: url('assets/Polkup_imagen_caja.png');">
+                <div class="accordion-content">
+                    <h3>La Caja</h3>
+                    <p>Caja del juego Polkup, donde se almacenan y organizan las piezas que componen el juego.</p>
+                </div>
             </div>
-            <div class="thumb-item" data-large="assets/Polkup_imagen_cartas.png" data-caption="Cartas del juego Polkup con iconografía oficial.">
-                <img src="assets/Polkup_imagen_cartas.png" alt="Miniatura 3">
+            <div class="accordion-item" style="--bg-img: url('assets/Polkup_imagen_cartas.png');">
+                <div class="accordion-content">
+                    <h3>Cartas</h3>
+                    <p>Cartas del juego Polkup con iconografía oficial.</p>
+                </div>
             </div>
-            <div class="thumb-item" data-large="assets/Polkup_imagen_dado.png" data-caption="Dado mecánico del juego Polkup.">
-                <img src="assets/Polkup_imagen_dado.png" alt="Miniatura 4">
+            <div class="accordion-item" style="--bg-img: url('assets/Polkup_imagen_dado.png');">
+                <div class="accordion-content">
+                    <h3>Dado Mecánico</h3>
+                    <p>Dado mecánico del juego Polkup.</p>
+                </div>
             </div>
-            <div class="thumb-item" data-large="assets/Polkup_imagen_varas.png" data-caption="Varas de cuatro colores unidas por cuerdas, utilizadas para subir por la torre.">
-                <img src="assets/Polkup_imagen_varas.png" alt="Miniatura 5">
+            <div class="accordion-item" style="--bg-img: url('assets/Polkup_imagen_varas.png');">
+                <div class="accordion-content">
+                    <h3>Varas de Ascenso</h3>
+                    <p>Varas de cuatro colores unidas por cuerdas, utilizadas para subir por la torre.</p>
+                </div>
             </div>
-            <div class="thumb-item" data-large="assets/Polkup_imagen_mesa.png" data-caption="Mesa giratoria con divisiones de cuatro colores.">
-                <img src="assets/Polkup_imagen_mesa.png" alt="Miniatura 6">
-            </div>
-        </div>
-    </div>
-</section>
-
-
-    <!-- SECCIÓN 3: Bloques de Texto con GIFs de fondo (Máximo protagonismo al GIF) -->
-    <section class="gif-text-section">
-        
-        <!-- Concepto 1 -->
-        <div class="gif-block" style="--gif-url: url('assets/polkup_dado_1.gif');">
-            <div class="text-content">
-                <h3>¿Cómo se juega?</h3>
-                <p>Cada jugador se ubica en la base de la torre, uno frente a otro, formando una cruz. <b>El jugador más alto comienza presionando el dado mecánico.</b></p>
-            </div>
+            <div class="accordion-item" style="--bg-img: url('assets/Polkup_imagen_mesa.png');">
+                <div class="accordion-content">
+                    <h3>Mesa Giratoria</h3>
+                    <p>Mesa giratoria con divisiones de cuatro colores.</p>
+                </div>
             </div>
         </div>
-
-        <!-- Concepto 2 -->
-        <div class="gif-block" style="--gif-url: url('assets/polkup_rotar_2.gif');">
-            <div class="text-content">
-                <h3>Estrategia de Movimiento</h3>
-                <p>Según el color obtenido, debe elegir el agujero de ese color que le resulte más cercano o estratégico. El jugador puede mover cualquiera de sus dos varas (delantera o trasera) hacia el nuevo agujero. En su turno, el jugador puede mover la base giratoria y las secciones de la torre hasta donde las cuerdas tensas lo permitan. <b>Al momento de insertar la vara, no podrá volver a tocar la torre hasta completar el movimiento.</p>
-            </div>
-        </div>
-
-        <!-- Concepto 3 -->
-        <div class="gif-block" style="--gif-url: url('assets/polkup_cartas_3.gif');">
-            <div class="text-content">
-                <h3>Reglas y Caídas</h3>
-                <p>Siempre debe mantener al menos una vara anclada a la estructura. No puede tener ambas varas sin apoyo al mismo tiempo. Si un jugador cae en un agujero con borde negro, deberá sacar una carta y realizar la acción indicada. Si ambas varas se sueltan, se considera una caída y el jugador debe volver a comenzar desde la base de la torre. Una vez realizado el movimiento, el turno finaliza y continúa el siguiente jugador.</p>
-            </div>
-        </div>
-        
-        <!-- Concepto 4 (¡CORREGIDO! Ya no está atrapado en el bloque anterior) -->
-        <div class="gif-block" style="--gif-url: url('assets/polkup_cima_4.gif');">
-            <div class="text-content">
-                <h3>¿Cómo se gana?</h3>
-                <p>Gana el jugador que sea el primero en llegar con sus dos varillas a la cima de la torre.</p>
-            </div>
-        </div>
-
     </section>
 
+    <section id="mecanicas" class="gif-text-section">
+        <div class="section-header-center reveal">
+            <span class="pre-title-red">MECÁNICAS</span>
+            <h2>¿Cómo se juega?</h2>
+        </div>
+        <div class="gif-block reveal" style="--gif-url: url('assets/polkup_dado_1.gif');">
+            <div class="text-content">
+                <h3>¿Cómo se empieza?</h3>
+                <p>Cada jugador se ubica en la base formando una cruz. El jugador de mayor estatura inicia la partida presionando el <b>dado mecánico</b>.</p>
+            </div>
+        </div>
 
-<<section class="dark-footer-container">
-    
-    <svg class="dark-arc-top" viewBox="0 0 1440 150" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M0,150 L1440,150 L1440,50 C1000,-20 440,-20 0,50 Z" fill="#333333"/>
-    </svg>
+        <div class="gif-block reveal" style="--gif-url: url('assets/polkup_rotar_2.gif');">
+            <div class="text-content">
+                <h3>Estrategia de movimiento</h3>
+                <p>Según el color obtenido, <b>debe elegir el agujero de ese
+color que le resulte más cercano o estratégico</b>. El jugador
+puede mover cualquiera de sus dos varas hacia el nuevo agujero. En su turno, el jugador puede mover la base giratoria
+y las secciones de la torre hasta donde las cuerdas tensas lo permitan.</p>
+            </div>
+        </div>
 
-    <div class="dark-footer-body">
+        <div class="gif-block reveal" style="--gif-url: url('assets/polkup_cartas_3.gif');">
+            <div class="text-content">
+                <h3>Peligro de Caída</h3>
+                <p>Siempre <b>debe mantener al menos una vara anclada</b> a
+la estructura. Si un jugador cae en un agujero con borde negro, deberá
+sacar una carta y realizar la acción indicada.
+<b>Si ambas varas se sueltan, se considera una caída.</b></p>
+            </div>
+        </div>
         
-        <h2 class="dark-section-title">Interfaz Digital del juego Polkup</h2>
-        <p class="dark-section-text">Esta interfaz digital de Polkup propone una exploración experimental del juego, extrayendo sus principales rasgos y gestos para transformarlos en experiencias interactivas. A través de distintas dinámicas visuales y de interacción, el usuario puede conocer y experimentar la esencia del juego desde una perspectiva digital.</p>
-
-        <div class="left-content-block">
-            <h3 class="left-subtitle">Interpretación del juego</h3>
-            <p class="left-text">Mi interpretación del juego se centra en cómo los círculos de colores forman parte de toda su gráfica y acompañan el recorrido del jugador. Aunque se encuentran presentes de manera constante, estos pasan por distintas etapas dentro del juego y adquieren diferentes significados según el momento en que aparecen.
-Lo que me interesa mostrar en esta página experimental es cómo el círculo se mantiene presente durante toda la experiencia y cómo se relaciona con los distintos momentos que componen el juego. De esta manera, la propuesta busca evidenciar el recorrido que realiza esta forma a través de las diferentes etapas, mostrando cómo convive dentro de una estructura bien definida por polígonos y cómo participa en la construcción de la experiencia general del juego.
-</p>
+        <div class="gif-block reveal" style="--gif-url: url('assets/polkup_cima_4.gif');">
+            <div class="text-content">
+                <h3>¿Cómo se gana?</h3>
+                <p>Gana el jugador que logre llevar sus <b>dos varillas a la cima</b> de la torre.</p>
+            </div>
         </div>
+    </section>
 
-        <div class="color-circles-container">
-            <div class="color-circle circle-red"></div>
-            <div class="color-circle circle-yellow"></div>
-            <div class="color-circle circle-blue"></div>
-            <div class="color-circle circle-green"></div>
+   <!-- SECCIÓN 5: PLACA OSCURA INTEGRADORA -->
+    <section id="experimental" class="dark-footer-container">
+        <svg class="dark-arc-top" viewBox="0 0 1440 150" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0,150 L1440,150 L1440,50 C1000,-20 440,-20 0,50 Z" fill="#1A1A1A"/>
+        </svg>
+
+        <div class="dark-footer-body">
+            
+            <!-- CABECERA PRINCIPAL (CENTRADA ORIGINAL) -->
+            <div class="dark-main-header reveal">
+                <span class="pre-title-dark">PROYECTO EXPERIMENTAL</span>
+                <h2 class="dark-section-title-center">Interfaz Digital Polkup</h2>
+                <p class="dark-section-text-center">Una exploración interactiva que abstrae los <b>gestos táctiles del juego físico</b> para transformarlos en <b>dinámicas visuales</b> dentro del <b>ecosistema digital</b>.</p>
+            </div>
+
+            <!-- BLOQUES DE TARJETAS HORIZONTALES -->
+            <div class="dark-cards-stack">
+                
+                <!-- CARD 1: Interpretación del juego -->
+                <div class="info-card-block reveal">
+                    <div class="info-card-text">
+                        <h3>Interpretación del juego</h3>
+                        <p>Al jugar, me llamó la atención cómo las secciones giraban para encontrar puntos de anclaje y cómo la tensión de la cuerda permitía avanzar y construir el camino hacia la cima. Sin embargo, lo que más destacó para mí fue la presencia constante de los círculos, ubicados estratégicamente para guiar el recorrido y posibilitar el avance del jugador.</p>
+                    </div>
+                    <div class="info-card-aside">
+                        <div class="circles-grid-2x2">
+                            <div class="color-circle circle-red"></div>
+                            <div class="color-circle circle-yellow"></div>
+                            <div class="color-circle circle-blue"></div>
+                            <div class="color-circle circle-green"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 2: Rasgos extraídos -->
+                <div class="info-card-block reveal">
+                    <div class="info-card-aside">
+                        <div class="mechanics-icons-container">
+                            <div class="mech-icon-wrapper">
+                                <img src="assets/anclar_polkup-fisico.png" alt="Anclar" class="mech-img-icon">
+                            </div>
+                            <div class="mech-icon-wrapper">
+                                <img src="assets/rotar_polkup_fisico.png" alt="Rotar" class="mech-img-icon">
+                            </div>
+                            <div class="mech-icon-wrapper">
+                                <img src="assets/llegaralacima_polkup_fisico.png" alt="Llegar a la Cima" class="mech-img-icon">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info-card-text">
+                        <h3>Rasgos extraídos</h3>
+                        <p>El principal rasgo que extraje del juego fue la <b>forma del círculo</b> y la manera en que esta se encuentra presente en distintas etapas de la experiencia. El círculo aparece <b>al momento de anclar</b>, durante la <b>rotación de las secciones</b> and también en el <b>recorrido que conduce hacia la cima</b>. Aunque estas acciones forman parte de un proceso para alcanzar la victoria dentro del <b>juego físico</b>, todas ellas están <b>guiadas por una misma forma: el círculo</b>.</p>
+                    </div>
+                </div>
+
+                <!-- CARD 3: Página experimental -->
+                <div class="info-card-block vertical reveal">
+                    <h3>Página experimental</h3>
+                    <div class="experimental-two-columns">
+                        <div class="exp-column">
+                            <p>Al trasladar estos elementos a la <b>página experimental</b>, busqué representar las tres acciones principales que identifiqué en el juego: <b>anclar, rotar y llegar a la cima</b>. Para ello, utilicé el <b>círculo como elemento central de interacción</b>, aprovechando el <b>movimiento del cursor</b> y la totalidad de la pantalla como <b>espacio interactivo</b>.</p>
+                        </div>
+                        <div class="exp-column">
+                            <p>El recorrido de la página representa de manera más abstracta y dinámica el <b>proceso de ascenso</b> presente en el juego. Los <b>colores</b> acompañan constantemente esta experiencia, reforzando la <b>presencia de los círculos</b> a lo largo del recorrido. Asimismo, el <b>sonido</b> forma parte de la <b>interacción</b>, ayudando al usuario a <b>orientarse</b> y comprender las distintas <b>acciones</b> que se desarrollan dentro de la página.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- NUEVA SECCIÓN DE MECÁNICAS ABSTRACTAS DE CÍRCULOS (FUERA DE LAS TARJETAS DE TEXTO) -->
+            <div class="abstract-mechanics-grid reveal">
+                
+                <!-- 1. ANCLA -->
+                <a href="experimental.html?screen=ancla" class="mechanic-card card-ancla">
+                    <h4>Ancla</h4>
+                    <p>El punto de sujeción táctil en la estructura.</p>
+                    <div class="animation-container container-ancla">
+                        <div class="circle-node node-1"></div>
+                        <div class="dotted-line"></div>
+                        <div class="circle-node node-2"></div>
+                    </div>
+                </a>
+
+                <!-- 2. ROTACIÓN -->
+                <a href="experimental.html?screen=rota" class="mechanic-card card-rota">
+                    <h4>Rotar</h4>
+                    <p>El giro dinámico de las secciones de la torre.</p>
+                    <div class="animation-container container-rotar">
+                        <div class="dots-ring">
+                            <div class="ring-dot dot-1"></div>
+                            <div class="ring-dot dot-2"></div>
+                            <div class="ring-dot dot-3"></div>
+                            <div class="ring-dot dot-4"></div>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- 3. LLEGA A LA CIMA -->
+                <a href="experimental.html?screen=cima" class="mechanic-card card-cima">
+                    <h4>Llega a la Cima</h4>
+                    <p>El pulso final del ascenso vertical absoluto.</p>
+                    <div class="animation-container container-cima">
+                        <div class="pulsing-circle pc-1"></div>
+                        <div class="pulsing-circle pc-2"></div>
+                    </div>
+                </a>
+
+            </div>
+            
+            <!-- ACCIÓN FINAL -->
+            <p class="rainbow-text reveal">
+                <span>E</span><span>x</span><span>p</span><span>l</span><span>o</span><span>r</span><span>a</span><span>&nbsp;</span>
+                <span>l</span><span>a</span><span>&nbsp;</span>
+                <span>e</span><span>x</span><span>p</span><span>e</span><span>r</span><span>i</span><span>e</span><span>n</span><span>c</span><span>i</span><span>a</span><span>&nbsp;</span>
+                <span>a</span><span>q</span><span>u</span><span>í</span>
+            </p>
+
+            <div class="image-button-container reveal">
+                <a href="experimental.html" class="custom-interactive-btn">
+                    <!-- Lupa de círculos de colores difusos que se activa en hover -->
+                    <div class="btn-inner-glow">
+                        <div class="glow-dot dot-blue"></div>
+                        <div class="glow-dot dot-yellow"></div>
+                        <div class="glow-dot dot-red"></div>
+                        <div class="glow-dot dot-green"></div>
+                    </div>
+                    <!-- Pictograma subido en color blanco -->
+                    <img src="assets/pictograma-touch-boton.png" alt="Icono Pulsar" class="btn-icon-img">
+                </a>
+            </div>
+
+            <!-- COLOFÓN DE LA PÁGINA -->
+            <footer class="colofon-section">
+                <div class="colofon-logo-container">
+                    <img src="assets/LOGO-PUCV-PCS-BLANCO.png" alt="Logo Universidad" class="colofon-logo">
+                </div>
+                <p>Esta página experimental fue desarrollada por <strong>Sofía Rojas</strong> utilizando <strong>Visual Studio Code</strong> y <strong>GitHub</strong> para su diseño, desarrollo y publicación. Todo el proceso de creación, incluyendo las distintas etapas de trabajo, pruebas y decisiones de diseño, se encuentra registrado en <strong>Wikicasiopea</strong>.</p>
+            </footer>
         </div>
-        
-        <div class="left-content-block">
-            <h3 class="left-subtitle">Rasgos extraídos del juego</h3>
-            <p class="left-text">Para la realización de esta página se extrajeron distintos rasgos y gestos presentes en el juego Polkup, con el objetivo de reinterpretarlos dentro de una experiencia digital interactiva. La forma principal utilizada es el círculo, ya que es el elemento que más predomina en la estructura del juego y en sus mecánicas.
+    </section>
 
-A partir de esta forma se desarrollan las distintas interacciones de la interfaz. El círculo representa la acción de anclarse en los orificios para avanzar, la rotación de las secciones de la torre y el movimiento de los propios elementos durante la experiencia. Asimismo, la interfaz incorpora la idea de ascenso, reflejando el objetivo principal del juego: alcanzar la cima.
-
-De esta manera, la propuesta digital se construye en torno a las diferentes posibilidades del círculo, transformando los gestos físicos del juego en acciones visuales e interactivas que permiten experimentar su esencia en un entorno digital.</p>
-        </div>
-
-      <p class="rainbow-text">
-    <span>E</span><span>x</span><span>p</span><span>l</span><span>o</span><span>r</span><span>a</span><span>&nbsp;</span>
-    <span>l</span><span>a</span><span>&nbsp;</span>
-    <span>e</span><span>x</span><span>p</span><span>e</span><span>r</span><span>i</span><span>e</span><span>n</span><span>c</span><span>i</span><span>a</span><span>&nbsp;</span>
-    <span>a</span><span>q</span><span>u</span><span>í</span>
-</p>
-<div class="image-button-container">
-            <a href="experimental.html" class="img-btn-link">
-                <img src="assets/icono_pulsar.png" alt="Botón Polkup" class="interactive-btn-img">
-            </a>
-        </div>
-
-     
-        </div>
-</section>
-
-
-
-    <!-- Enlace externo a tu JavaScript para el movimiento de los círculos -->
     <script src="script.js"></script>
 </body>
 </html>

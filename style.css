@@ -4,19 +4,14 @@
     --color-rojo: #EC2828;
     --color-amarillo: #EDC217;
     --color-azul: #3329ED;
-    --color-texto-oscuro: #333333;
+    --color-texto-oscuro: #1A1A1A;
     --color-fondo: #ffffff;
 }
 
 /* --- REGLAS GENERALES --- */
-
-
-/* 🌟 COMPENSACIÓN DE NAVBAR EN EL BODY */
-/* Como el menú es fijo (fixed), flota sobre la página y taparía los primeros 70px del Hero. 
-   Con esta regla hacemos que el comportamiento del scroll sea ultrasuave de forma nativa */
 html {
     scroll-behavior: smooth;
-    scroll-padding-top: 70px; /* Evita que el navbar tape los títulos al clickear un enlace */
+    scroll-padding-top: 70px; /* Evita que el header tape las secciones */
 }
 
 * {
@@ -30,13 +25,68 @@ body {
     background-color: var(--color-fondo);
     color: var(--color-texto-oscuro);
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
 }
 
-/* Tipografía Bauhaus para todos los títulos globales */
-h1, h2, h3 {
+/* --- NUEVO SISTEMA DE JERARQUÍAS --- */
+h1 {
     font-family: 'Bauhaus 93', 'Arial Black', sans-serif; 
     color: var(--color-texto-oscuro);
-    letter-spacing: 1px;
+    letter-spacing: -0.5px;
+}
+
+h2 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    color: var(--color-texto-oscuro);
+}
+
+h3, h4 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    color: var(--color-texto-oscuro);
+}
+
+/* Micro-título que va ARRIBA del título principal */
+.pre-title-blue {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--color-azul);
+    margin-bottom: 10px;
+    display: inline-block;
+}
+.pre-title-red {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--color-rojo);
+    margin-bottom: 15px;
+    display: inline-block;
+}
+.pre-title-green {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--color-verde);
+    margin-bottom: 15px;
+    display: inline-block;
+}
+.pre-title-yellow {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--color-amarillo);
+    margin-bottom: 15px;
+    display: inline-block;
 }
 
 /* --- SECCIÓN 1: HERO PARALLAX --- */
@@ -61,76 +111,82 @@ h1, h2, h3 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 15px; 
+    gap: 20px;
     width: 100%;
-    max-width: 650px;
+    max-width: 700px;
     padding: 0 20px;
 }
 
 .main-logo {
     width: 100%;
-    max-width: 580px; 
+    max-width: 540px; 
     height: auto;
-    margin-bottom: 5px;
-    filter: drop-shadow(0px 12px 24px rgba(0, 0, 0, 0.12)); 
-}
-
-.hero-title {
-    font-size: 3.5rem;
-    line-height: 1.1;
-    margin-bottom: 5px;
+    filter: drop-shadow(0px 15px 30px rgba(0, 0, 0, 0.08)); 
 }
 
 .hero-slogan {
-    font-size: 1.3rem;
-    font-weight: 600;
-    letter-spacing: 1px;
+    font-size: 1.15rem;
+    font-weight: 400;
+    letter-spacing: 2px;
     text-transform: uppercase; 
-}
-
-.hero-subtext {
-    font-size: 1rem;
-    font-weight: 300;
-    max-width: 520px;
-    line-height: 1.6;
+    color: #666666;
 }
 
 /* --- 10 CÍRCULOS DE FONDO --- */
 .circle {
     position: absolute;
     border-radius: 50%;
-    opacity: 0.55; 
-    filter: blur(12px); 
+    opacity: 0.35; 
+    filter: blur(20px); 
     will-change: transform;
     z-index: 1;
+    transition: transform 0.5s ease, opacity 0.5s ease, filter 0.5s ease;
+}
+.circle:hover {
+    transform: scale(1.15) !important;
+    opacity: 0.65;
+    filter: blur(8px);
+}
+.circle-1  { width: 140px; height: 140px; top: 12%; left: 7%;  background-color: var(--color-verde); animation: float1 12s ease-in-out infinite; }
+.circle-2  { width: 320px; height: 320px; top: 8%;  right: 4%; background-color: var(--color-rojo); animation: float2 18s ease-in-out infinite; }
+.circle-3  { width: 200px; height: 200px; bottom: 15%; left: 8%; background-color: var(--color-amarillo); animation: float3 14s ease-in-out infinite; }
+.circle-4  { width: 250px; height: 250px; bottom: 10%; right: 12%; background-color: var(--color-azul); animation: float4 16s ease-in-out infinite; }
+.circle-5  { width: 95px;  height: 95px;  top: 48%; left: 4%;  background-color: var(--color-rojo); animation: float1 10s ease-in-out infinite; }
+.circle-6  { width: 180px; height: 180px; top: 4%;   left: 38%; background-color: var(--color-azul); animation: float2 15s ease-in-out infinite; }
+.circle-7  { width: 220px; height: 220px; bottom: 30%; right: 3%; background-color: var(--color-verde); animation: float3 17s ease-in-out infinite; }
+.circle-8  { width: 120px; height: 120px; top: 28%; right: 32%; background-color: var(--color-amarillo); animation: float4 13s ease-in-out infinite; }
+.circle-9  { width: 150px; height: 150px; bottom: 18%; left: 45%; background-color: var(--color-rojo); animation: float1 11s ease-in-out infinite; }
+.circle-10 { width: 270px; height: 270px; top: 42%; left: 22%; background-color: var(--color-verde); animation: float2 20s ease-in-out infinite; }
+
+@keyframes float1 {
+    0%, 100% { transform: translateY(0) translateX(0); }
+    50% { transform: translateY(-25px) translateX(15px); }
+}
+@keyframes float2 {
+    0%, 100% { transform: translateY(0) translateX(0); }
+    50% { transform: translateY(30px) translateX(-20px); }
+}
+@keyframes float3 {
+    0%, 100% { transform: translateY(0) translateX(0); }
+    50% { transform: translateY(-20px) translateX(-15px); }
+}
+@keyframes float4 {
+    0%, 100% { transform: translateY(0) translateX(0); }
+    50% { transform: translateY(25px) translateX(20px); }
 }
 
-.circle-1  { width: 140px; height: 140px; top: 12%; left: 7%;  background-color: var(--color-verde); }
-.circle-2  { width: 320px; height: 320px; top: 8%;  right: 4%; background-color: var(--color-rojo); }
-.circle-3  { width: 200px; height: 200px; bottom: 15%; left: 8%; background-color: var(--color-amarillo); }
-.circle-4  { width: 250px; height: 250px; bottom: 10%; right: 12%; background-color: var(--color-azul); }
-.circle-5  { width: 95px;  height: 95px;  top: 48%; left: 4%;  background-color: var(--color-rojo); }
-.circle-6  { width: 180px; height: 180px; top: 4%;   left: 38%; background-color: var(--color-azul); }
-.circle-7  { width: 220px; height: 220px; bottom: 30%; right: 3%; background-color: var(--color-verde); }
-.circle-8  { width: 120px; height: 120px; top: 28%; right: 32%; background-color: var(--color-amarillo); }
-.circle-9  { width: 150px; height: 150px; bottom: 18%; left: 45%; background-color: var(--color-rojo); }
-.circle-10 { width: 270px; height: 270px; top: 42%; left: 22%; background-color: var(--color-verde); }
-
-/* --- SECCIÓN 2: ¿QUÉ ES POLKUP? (CENTRADA) --- */
+/* --- SECCIÓN 2: ¿QUÉ ES POLKUP? --- */
 .que-es-polkup-section-simple {
     width: 100%;
-    padding: 120px 20px 80px 20px; 
+    padding: 160px 20px 100px 20px; /* Más espacio para que respire */
     background-color: #ffffff;
     display: flex;
     justify-content: center;
     align-items: center; 
-    box-sizing: border-box;
-    position: relative;
-    z-index: 1; /* Plano inferior */
 }
 
 .polkup-content-simple {
-    max-width: 850px; 
+    max-width: 800px; 
     text-align: center; 
     display: flex;
     flex-direction: column;
@@ -138,135 +194,133 @@ h1, h2, h3 {
 }
 
 .polkup-content-simple h2 {
-    font-size: 4.5rem; 
-    margin-bottom: 30px;
+    font-size: 4rem; 
+    margin-bottom: 25px;
+    line-height: 1;
 }
 
 .polkup-content-simple p {
-    font-family: 'Poppins', sans-serif; 
-    font-size: 1.45rem; 
+    font-size: 1.35rem; 
     font-weight: 300; 
-    line-height: 1.9; 
+    line-height: 1.8; 
     color: #555555;
-    max-width: 750px; 
+    max-width: 650px; /* Alrededor de 10 palabras por línea */
 }
 
-/* --- SECCIÓN 3: GALERÍA DE VISOR PRINCIPAL Y MINIATURAS --- */
+/* --- SECCIÓN 3: GALERÍA DE ACORDEÓN --- */
 .interactive-gallery-section {
-    padding: 80px 0;
+    padding: 120px 0;
     background-color: #ffffff;
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: relative;
-    z-index: 1; /* Plano inferior junto al texto intro */
 }
 
 .interactive-gallery-section h2 {
-    font-size: 3rem;
-    margin-bottom: 40px;
+    font-size: 4rem;
+    margin-bottom: 50px;
     text-align: center;
 }
 
-.gallery-wrapper {
-    width: 100%;
-    max-width: 950px; 
-    padding: 0 20px;
-    box-sizing: border-box;
-}
-
-.main-display {
-    width: 100%;
-    height: 500px; 
+.accordion-gallery {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
-}
-
-.main-display img {
-    width: 100%;
-    height: 90%;
-    object-fit: contain; 
-    transition: opacity 0.25s ease;
-}
-
-.gallery-caption {
-    height: 10%;
-    margin-top: 15px;
-    font-family: 'Poppins', sans-serif;
-    font-size: 1.1rem;
-    font-weight: 300; 
-    color: #555555;
-    text-align: center;
-    max-width: 650px; 
-    line-height: 1.5;
-}
-
-.thumbnails-grid {
-    display: flex;
-    justify-content: center;
+    width: 90%;
+    max-width: 1200px;
+    height: 520px;
     gap: 15px;
-    width: 100%;
-    flex-wrap: wrap;
-    margin-top: 20px;
 }
 
-.thumb-item {
-    width: 110px;
-    height: 80px;
-    border-radius: 12px;
+.accordion-item {
+    flex: 1;
+    position: relative;
+    border-radius: 24px; /* Bordes más redondeados premium */
     overflow: hidden;
+    background-image: var(--bg-img);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
     cursor: pointer;
-    border: 3px solid transparent;
-    transition: all 0.25s ease;
-    opacity: 0.5;
+    transition: flex 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s ease;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
 }
 
-.thumb-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.accordion-item::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.5) 0%, transparent 80%);
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.5s ease;
 }
 
-.thumb-item.active {
-    border-color: #333333; 
+.accordion-content {
+    position: absolute;
+    bottom: 0; left: 0; width: 100%;
+    padding: 35px;
+    z-index: 2;
+    color: #ffffff;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.4s ease, transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    pointer-events: none;
+}
+
+.accordion-content h3 {
+    color: #ffffff !important;
+    font-size: 1.8rem;
+    margin-bottom: 8px;
+}
+
+.accordion-content p {
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.4;
+    opacity: 0.85;
+}
+
+.accordion-gallery:hover .accordion-item { flex: 0.5; opacity: 0.5; }
+.accordion-gallery .accordion-item:hover { flex: 4; opacity: 1; }
+.accordion-item:hover::before { opacity: 1; }
+.accordion-item:hover .accordion-content {
     opacity: 1;
-    transform: scale(1.05);
+    transform: translateY(0);
+    transition-delay: 0.1s;
 }
 
-.thumb-item:hover {
-    opacity: 0.9;
-}
-
-/* --- SECCIÓN 4: TEXTO CON GIFS (INTERACTIVIDAD HOVER) --- */
+/* --- SECCIÓN 4: PASOS / GIFS --- */
 .gif-text-section {
-    padding: 60px 0 120px 0;
+    padding: 120px 0;
     background-color: var(--color-fondo);
     display: flex;
     flex-direction: column;
-    gap: 60px; 
-    position: relative;
-    z-index: 1;
+    gap: 50px; 
+}
+
+.section-header-center {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.section-header-center h2 {
+    font-size: 4rem;
 }
 
 .gif-block {
     position: relative;
-    height: 65vh;
+    height: 50vh;
     width: 90%; 
-    max-width: 1200px;
-    margin: 0 auto 50px auto; 
+    max-width: 1100px;
+    margin: 0 auto; 
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 40px;
+    padding: 60px;
     overflow: hidden;
-    border-radius: 24px; 
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15); 
-    border: 1px solid rgba(0, 0, 0, 0.04); 
+    border-radius: 28px; 
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.08); 
     background-image: var(--gif-url);
     background-attachment: fixed;
     background-position: center;
@@ -279,7 +333,7 @@ h1, h2, h3 {
     content: '';
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(255, 255, 255, 0.95); 
+    background: rgba(255, 255, 255, 0.90); 
     z-index: 1;
     transition: opacity 0.5s ease; 
 }
@@ -287,21 +341,33 @@ h1, h2, h3 {
 .text-content {
     position: relative;
     z-index: 2;
-    max-width: 700px;
+    max-width: 550px;
     transition: opacity 0.4s ease; 
 }
 
+/* Numeración gigante para marcar jerarquía */
+.step-number {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-azul);
+    display: block;
+    margin-bottom: 5px;
+    font-family: 'Poppins', sans-serif;
+}
+
 .text-content h3 {
-    font-size: 2.8rem;
-    margin-bottom: 20px;
-    color: var(--color-texto-oscuro) !important; 
+    font-family: 'Bauhaus 93', 'Arial Black', sans-serif;
+    font-size: 2.5rem;
+    margin-bottom: 15px;
 }
 
 .text-content p {
-    font-size: 1.2rem;
-    line-height: 1.8;
+    font-size: 1.1rem;
+    line-height: 1.7;
     font-weight: 400; 
-    color: var(--color-texto-oscuro) !important; 
+    color: #444444 !important;
+    max-width: 500px; /* Cuadro de texto un poco más ancho */
+    margin: 0 auto; /* Centrado horizontal */
 }
 
 .gif-block:hover::before,
@@ -309,122 +375,468 @@ h1, h2, h3 {
     opacity: 0;
 }
 
-/* ====================================================
-   NUEVA ESTRUCTURA OSCURA UNIFICADA (EFECTO CORTINA SUPERPUESTA)
-   ==================================================== */
+/* --- SECCIÓN 5: PLACA OSCURA INTEGRADORA --- */
 .dark-footer-container {
     position: relative;
     width: 100%;
-    margin-top: 100px; 
-    z-index: 10; /* Eleva la placa para pisar las secciones blancas */
-    box-shadow: 0 -20px 40px rgba(0, 0, 0, 0.25); 
+    margin-top: 140px; 
+    z-index: 10; 
 }
 
 .dark-arc-top {
     position: absolute;
-    top: -148px; 
-    left: 0;
-    width: 100%;
+    top: -132px; 
+    left: -1%;
+    width: 102%;
     height: 150px;
-    display: block;
     z-index: 11; 
+    filter: drop-shadow(0px -8px 12px rgba(0, 0, 0, 0.4)) blur(4px);
+    transform: scaleY(1.08);
 }
 
 .dark-footer-body {
-    background-color: #333333; 
+    background-color: #1A1A1A;
     width: 100%;
-    padding: 20px 20px 120px 20px; 
+    padding: 60px 20px 120px 20px; 
     display: flex;
     flex-direction: column;
-    align-items: center; 
-    gap: 40px; 
+    gap: 80px; /* Separación balanceada */
 }
 
-.dark-section-title {
-    font-size: 3rem;
-    color: #ffffff !important;
+/* CABECERA PRINCIPAL CENTRADA */
+.dark-main-header {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
     text-align: center;
-    max-width: 800px;
 }
 
-.dark-section-text {
-    font-family: 'Poppins', sans-serif;
+.dark-section-title-center {
+    font-size: 3.8rem;
+    color: #ffffff !important;
+    margin-bottom: 20px;
+}
+
+.dark-section-text-center {
     font-size: 1.2rem;
     font-weight: 300;
-    color: #ffffff !important;
-    text-align: center;
-    max-width: 650px;
-    line-height: 1.7;
-    opacity: 0.95;
+    color: #cccccc !important;
+    max-width: 550px; /* Alrededor de 10 palabras por línea */
+    margin: 0 auto;
+    line-height: 1.8;
 }
 
-/* --- BLOQUE IZQUIERDO --- */
-.left-content-block {
-    width: 100%;
-    max-width: 1000px; 
-    text-align: left;
-    margin-top: 20px;
-    padding-left: 10%; 
-    align-self: flex-start; 
+/* --- NUEVA DIAGRAMACIÓN DE TARJETAS HORIZONTALES (PLACA OSCURA) --- */
+.dark-cards-stack {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 40px;
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto 10px auto;
 }
 
-.left-subtitle {
-    font-size: 2.5rem;
-    color: #ffffff !important;
-    margin-bottom: 5px;
+.info-card-block {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 28px;
+    padding: 45px 50px;
+    display: flex;
+    gap: 80px; /* Aumentado de 50px a 80px para empujar el texto a la derecha */
+    align-items: center;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    transition: border-color 0.3s ease;
 }
 
-.left-text {
+.info-card-block:hover {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.info-card-block.vertical {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.info-card-text {
+    flex: 1;
+}
+
+.info-card-block h3 {
     font-family: 'Poppins', sans-serif;
-    font-size: 1.1rem;
-    font-weight: 300;
+    font-weight: 700;
+    font-size: 1.8rem;
     color: #ffffff !important;
-    line-height: 1.7;
-    opacity: 0.85;
+    margin-bottom: 15px;
 }
 
-/* --- CÍRCULOS INTERACTIVOS --- */
-.color-circles-container {
+.info-card-text p {
+    font-size: 1.05rem;
+    font-weight: 300;
+    color: #cccccc !important;
+    line-height: 1.75;
+    max-width: 500px; /* Cuadro de texto un poco más ancho */
+}
+
+.info-card-aside {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 30px; 
-    width: 100%;
-    margin-top: 20px;
-    margin-bottom: 40px; 
+    min-width: 530px; /* Aumentado a 530px para acomodar los elementos más grandes */
+}
+
+/* Rejilla de círculos 2x2 */
+/* Rejilla de círculos 2x2 */
+.circles-grid-2x2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px; /* Separación entre círculos */
+    justify-content: center;
 }
 
 .color-circle {
-    width: 85px; 
+    width: 85px; /* Aumentado de 75px a 85px */
     height: 85px;
-    background-color: #ffffff;
     border-radius: 50%;
     cursor: pointer;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-    transition: background-color 0.4s ease, transform 0.3s ease;
+    background-color: rgba(255, 255, 255, 0.15); /* Inicialmente blanco translúcido */
+    border: 2.5px solid rgba(255, 255, 255, 0.4); /* Borde blanco */
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-.color-circle:hover {
-    transform: scale(1.08);
+.color-circle:hover { 
+    transform: scale(1.15); 
 }
 
-.circle-red:hover    { background-color: #EC2828; }
-.circle-yellow:hover { background-color: #EDC217; }
-.circle-blue:hover   { background-color: #3329ED; }
-.circle-green:hover  { background-color: #0DB500; }
+/* Encendido interactivo en hover con sus respectivos colores PolkUp */
+.circle-red:hover {
+    background-color: var(--color-rojo);
+    border-color: var(--color-rojo);
+    box-shadow: 0 0 25px rgba(236, 40, 40, 0.7);
+}
+.circle-yellow:hover {
+    background-color: var(--color-amarillo);
+    border-color: var(--color-amarillo);
+    box-shadow: 0 0 25px rgba(237, 194, 23, 0.7);
+}
+.circle-blue:hover {
+    background-color: var(--color-azul);
+    border-color: var(--color-azul);
+    box-shadow: 0 0 25px rgba(51, 41, 237, 0.7);
+}
+.circle-green:hover {
+    background-color: var(--color-verde);
+    border-color: var(--color-verde);
+    box-shadow: 0 0 25px rgba(13, 181, 0, 0.7);
+}
 
-/* --- TEXTO ARCOÍRIS --- */
+/* Contenedor de iconos SVG */
+.mechanics-icons-container {
+    display: flex;
+    gap: 25px; /* Aumentado de 20px a 25px */
+    align-items: center;
+    justify-content: center;
+}
+
+.mech-icon-wrapper {
+    width: 160px; /* Elementos más grandes aún (160px) */
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent; /* Sin cuadro contenedor visible */
+    border: none; /* Sin bordes */
+    transition: all 0.3s ease;
+    padding: 0; /* Sin espaciado interno */
+}
+
+.mech-icon-wrapper:hover {
+    transform: scale(1.15) translateY(-5px); /* Animación premium interactiva */
+}
+
+.mech-svg-icon,
+.mech-img-icon {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    opacity: 0.85;
+    transition: opacity 0.3s ease;
+}
+
+.mech-icon-wrapper:hover .mech-svg-icon,
+.mech-icon-wrapper:hover .mech-img-icon {
+    opacity: 1;
+}
+
+/* Rejilla de dos columnas para Card 3 */
+.experimental-two-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px; /* Aumentado de 40px a 60px para mejor organización visual */
+    width: 100%;
+    position: relative;
+}
+
+/* Divisor vertical sutil entre las columnas del texto experimental */
+.experimental-two-columns::after {
+    content: '';
+    position: absolute;
+    top: 5%;
+    bottom: 5%;
+    left: 50%;
+    width: 1px;
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateX(-50%);
+}
+
+.exp-column p {
+    font-size: 1.05rem;
+    font-weight: 300;
+    color: #cccccc !important;
+    line-height: 1.75;
+    max-width: 480px; /* Cuadro de texto un poco más ancho */
+}
+
+
+/* ====================================================
+   🔮 SECCIÓN DE MECÁNICAS DE CÍRCULOS ABSTRACTOS (FUERA DE LAS TARJETAS)
+   ==================================================== */
+.abstract-mechanics-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 30px;
+    width: 100%;
+    max-width: 1100px;
+    margin: 15px auto 0 auto; /* Más pegado a las tarjetas de arriba */
+}
+
+/* Detalles de color superior en tarjetas del laboratorio */
+.card-ancla {
+    border-top: 5px solid var(--color-rojo) !important;
+}
+.card-rota {
+    border-top: 5px solid var(--color-azul) !important;
+}
+.card-cima {
+    border-top: 5px solid var(--color-verde) !important;
+}
+
+.mechanic-card {
+    background: #E6E6E6; /* Fondo gris claro tipo maqueta */
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 20px;
+    padding: 35px 30px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: pointer;
+    text-decoration: none;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+}
+
+.mechanic-card:hover {
+    background: #F0F0F0; /* Más claro al hover */
+    border-color: rgba(0, 0, 0, 0.15);
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+.mechanic-card:hover h4 {
+    color: #1A1A1A !important;
+}
+.mechanic-card:hover p {
+    color: #555555 !important;
+}
+
+.mechanic-card h4 {
+    font-family: 'Bauhaus 93', 'Arial Black', sans-serif;
+    text-transform: capitalize;
+    color: #1A1A1A !important; /* Texto oscuro */
+    font-size: 1.85rem;
+    margin-bottom: 12px;
+    transition: color 0.3s ease;
+}
+/* Mantenemos el color oscuro original del h4 incluso en hover */
+
+.mechanic-card p {
+    display: block; 
+    font-size: 0.95rem;
+    font-weight: 400;
+    color: #555555 !important; /* Texto oscuro secundario */
+    margin-bottom: 25px;
+    line-height: 1.5;
+    max-width: 240px; /* Alrededor de 10 palabras por línea en tarjetas */
+}
+
+/* Contenedor común para el lienzo de animación */
+.animation-container {
+    width: 100%;
+    height: 150px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* --- 1. ANIMACIÓN: ANCLA (LÍNEA PUNTEADA AL HOVER) --- */
+.container-ancla {
+    position: relative;
+    width: 180px;
+    height: 80px;
+}
+.circle-node {
+    width: 32px; /* Elementos más visibles */
+    height: 32px;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.node-1 {
+    left: 10px;
+    background-color: var(--color-rojo);
+    box-shadow: 0 4px 10px rgba(236, 40, 40, 0.3);
+}
+.node-2 {
+    right: 10px;
+    background-color: var(--color-azul);
+    border: 2.5px solid #E6E6E6; /* Combina con el fondo de tarjeta */
+    box-shadow: 0 4px 10px rgba(51, 41, 237, 0.3);
+    opacity: 0.15; /* Casi invisible inicialmente */
+    z-index: 2;
+}
+.dotted-line {
+    width: 0; /* Empieza en 0 para dibujarse hacia la derecha */
+    height: 3px;
+    border-bottom: 3.5px dashed rgba(0, 0, 0, 0.2); /* Oscuro para contraste en tarjeta clara */
+    position: absolute;
+    left: 42px; /* Inicia justo después del node-1 */
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    opacity: 0;
+    transition: width 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s ease;
+}
+
+/* Hover - Revela línea y segundo nodo */
+.mechanic-card:hover .dotted-line {
+    width: 96px; /* Ajustado para unir los dos nodos */
+    opacity: 1;
+    border-bottom-color: rgba(0, 0, 0, 0.6);
+}
+.mechanic-card:hover .node-2 {
+    opacity: 1;
+    transform: translateY(-50%) scale(1.15); /* Efecto pop */
+}
+.mechanic-card:hover .node-1 {
+    transform: translateY(-50%) scale(1.15);
+}
+
+/* --- 2. ANIMACIÓN: ROTAR (ANILLO DE CÍRCULOS) --- */
+.container-rotar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.dots-ring {
+    width: 110px;
+    height: 110px;
+    position: relative;
+    border-radius: 50%;
+    animation: spinClockwise 5s linear infinite;
+    animation-play-state: paused;
+    transition: transform 0.3s ease;
+}
+.ring-dot {
+    width: 18px; /* Círculos más grandes */
+    height: 18px;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform-origin: center;
+}
+/* Distribución en círculo de 4 puntos (Verde, Amarillo, Rojo, Azul) */
+.dot-1 { transform: translate(-50%, -50%) rotate(0deg) translate(42px); background-color: var(--color-verde); box-shadow: 0 4px 8px rgba(13, 181, 0, 0.3); }
+.dot-2 { transform: translate(-50%, -50%) rotate(90deg) translate(42px); background-color: var(--color-amarillo); box-shadow: 0 4px 8px rgba(237, 194, 23, 0.3); }
+.dot-3 { transform: translate(-50%, -50%) rotate(180deg) translate(42px); background-color: var(--color-rojo); box-shadow: 0 4px 8px rgba(236, 40, 40, 0.3); }
+.dot-4 { transform: translate(-50%, -50%) rotate(270deg) translate(42px); background-color: var(--color-azul); box-shadow: 0 4px 8px rgba(51, 41, 237, 0.3); }
+
+/* Hover - Giran */
+.mechanic-card:hover .dots-ring {
+    animation-play-state: running;
+    transform: scale(1.1);
+}
+
+@keyframes spinClockwise {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* --- 3. ANIMACIÓN: CIMA (UN CÍRCULO CON UN COLOR QUE SE AGRANDA PERO NO BRILLE) --- */
+.container-cima {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+.pulsing-circle {
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: var(--color-verde); /* Círculo con un color (verde) sin degradados ni bordes */
+    opacity: 0;
+    box-shadow: none; /* Sin brillo */
+    border: none; /* Sin borde */
+    animation: zoomPulse 2s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+    animation-play-state: paused;
+}
+.pc-1 {
+    animation-delay: 0s;
+}
+.pc-2 {
+    animation-delay: 1s; /* Desfase continuo de túnel */
+}
+
+/* Hover - Avanza hacia la pantalla */
+.mechanic-card:hover .pulsing-circle {
+    animation-play-state: running;
+}
+
+@keyframes zoomPulse {
+    0% {
+        transform: scale(0.15); /* Al principio es chico */
+        opacity: 0;
+    }
+    15% {
+        opacity: 1; /* Se hace visible */
+    }
+    80% {
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(1.8); /* Luego se agranda */
+        opacity: 0;
+    }
+}
+
+
+/* --- TEXTO ARCOÍRIS FINAL --- */
 .rainbow-text {
-    font-size: 3rem; 
+    font-family: 'Bauhaus 93', 'Arial Black', sans-serif;
+    font-size: 4rem; 
     color: #ffffff;  
     text-align: center;
-    width: 100%;
-    margin-top: 60px;   
-    margin-bottom: 20px; 
-    cursor: default;
+    margin-top: 170px; /* Aumentado a 170px para dar más espacio de respiración */
+    margin-bottom: -10px;
+    letter-spacing: 1px;
     user-select: none; 
 }
 
@@ -432,53 +844,305 @@ h1, h2, h3 {
     display: inline-block;
     transition: color 0.2s ease, transform 0.2s ease; 
 }
+.rainbow-text span:hover { transform: translateY(-6px); }
+.rainbow-text span:nth-child(4n+1):hover { color: var(--color-rojo); }
+.rainbow-text span:nth-child(4n+2):hover { color: var(--color-amarillo); }
+.rainbow-text span:nth-child(4n+3):hover { color: var(--color-azul); }
+.rainbow-text span:nth-child(4n+4):hover { color: var(--color-verde); }
 
-.rainbow-text span:hover {
-    transform: translateY(-4px);
-}
-
-.rainbow-text span:nth-child(4n+1):hover { color: #EC2828; }
-.rainbow-text span:nth-child(4n+2):hover { color: #EDC217; }
-.rainbow-text span:nth-child(4n+3):hover { color: #3329ED; }
-.rainbow-text span:nth-child(4n+4):hover { color: #0DB500; }
-
-/* --- BOTÓN INTERACTIVO DE IMAGEN --- */
 .image-button-container {
     display: flex;
     justify-content: center; 
     align-items: center;
     width: 100%;
-    margin-top: 50px; 
-    margin-bottom: 20px; 
+    position: relative;
 }
 
-.interactive-btn-img {
-    max-width: 200px; 
-    height: auto;
+/* --- BOTÓN EXPERIMENTAL PERSONALIZADO EN HTML/CSS --- */
+.custom-interactive-btn {
+    position: relative;
+    width: 110px; /* Tamaño del círculo */
+    height: 110px;
+    border-radius: 50%;
+    background-color: #333333; /* Fondo gris oscuro solicitado */
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Mantiene la lupa de colores DENTRO del círculo */
     cursor: pointer;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease;
+    z-index: 10;
+}
+
+/* Efecto lupa de colores (blur) interno */
+.btn-inner-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.2);
+    width: 140px;
+    height: 140px;
+    opacity: 0;
+    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+    z-index: 1;
+    filter: blur(18px); /* Difumina de manera potente los círculos internos */
+}
+
+/* Círculos individuales de colores en el interior */
+.glow-dot {
+    position: absolute;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+}
+.dot-blue {
+    top: 20px;
+    left: 20px;
+    background-color: var(--color-azul);
+}
+.dot-yellow {
+    top: 20px;
+    right: 20px;
+    background-color: var(--color-amarillo);
+}
+.dot-red {
+    bottom: 20px;
+    left: 20px;
+    background-color: var(--color-rojo);
+}
+.dot-green {
+    bottom: 20px;
+    right: 20px;
+    background-color: var(--color-verde);
+}
+
+.btn-icon-img {
+    width: 54px; /* Tamaño del pictograma touch */
+    height: auto;
     display: block;
-    transition: transform 0.3s ease, opacity 0.3s ease; 
+    z-index: 2; /* Por delante del halo de color */
+    filter: brightness(0) invert(1); /* Convierte el pictograma negro en blanco puro */
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.interactive-btn-img:hover {
-    opacity: 0.7; 
-    transform: scale(0.92); 
+/* Hover Effects */
+.custom-interactive-btn:hover {
+    transform: scale(1.1); /* Crece levemente */
+    border-color: rgba(255, 255, 255, 0.55); /* El borde se ilumina */
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
 }
 
-.interactive-btn-img:active {
-    transform: scale(0.88); 
-    opacity: 0.6;
+.custom-interactive-btn:hover .btn-inner-glow {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.2); /* La lupa de colores crece dentro */
 }
-/* --- TEXTO ARCOÍRIS --- */
-.rainbow-text {
-    font-family: 'Bauhaus 93', 'Arial Black', sans-serif; /* 🌟 Agrega la tipografía Bauhaus */
-    font-size: 3.8rem; /* 🌟 Aumentado de 3rem a 3.8rem para que sea más grande */
-    color: #ffffff;  
-    text-align: center;
+
+.custom-interactive-btn:hover .btn-icon-img {
+    transform: scale(1.08) translateY(-2px); /* El pictograma reacciona en hover */
+}
+
+/* --- MENÚ DE NAVEGACIÓN (HEADER) --- */
+.nav-header {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    margin-top: 60px;   
-    margin-bottom: 20px; 
-    letter-spacing: 1px; /* Mantiene la consistencia de espacio con los otros títulos */
-    cursor: default;
-    user-select: none; 
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    z-index: 1000;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.nav-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-brand {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.nav-brand-logo {
+    height: 38px;
+    width: auto;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #444;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 550;
+    font-size: 0.95rem;
+    transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+    color: var(--color-azul);
+}
+
+.nav-links .nav-btn {
+    background: #1A1A1A;
+    color: #fff !important;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.nav-links .nav-btn:hover {
+    background: var(--color-azul);
+    color: #fff !important;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(51, 41, 237, 0.25);
+}
+
+/* --- BOTÓN DE HÉROE --- */
+.hero-btn {
+    margin-top: 25px;
+    background: #1A1A1A;
+    color: #fff;
+    padding: 14px 28px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0,0,0,0.1);
+    z-index: 100;
+}
+
+.hero-btn:hover {
+    background: var(--color-azul);
+    transform: translateY(-2px);
+    box-shadow: 0 15px 30px rgba(51, 41, 237, 0.25);
+    color: #fff;
+}
+
+/* --- COLOFÓN DE LA PÁGINA (FOOTER DE TEXTO CON LOGO) --- */
+.colofon-section {
+    background-color: #252525; /* Bloque más claro que el fondo #1A1A1A */
+    width: calc(100% + 40px); /* Ocupa todo el ancho de la pantalla (compensando padding del contenedor padre) */
+    margin-left: -20px;
+    margin-right: -20px;
+    margin-bottom: -120px; /* Alineación perfecta al borde inferior del contenedor padre */
+    margin-top: 100px;
+    padding: 60px 40px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08); /* Línea blanca transparente */
+}
+
+.colofon-logo-container {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.colofon-logo {
+    max-height: 48px; /* Un poco más chico y elegante */
+    width: auto;
+    opacity: 0.85;
+    transition: opacity 0.3s ease;
+}
+
+.colofon-logo:hover {
+    opacity: 1;
+}
+
+.colofon-section p {
+    font-size: 0.82rem; /* Tamaño de tipografía un poco más chico como solicitado */
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.45) !important; /* Más suave para atenuar créditos */
+    line-height: 1.8;
+    max-width: 700px;
+    margin: 0 auto;
+    letter-spacing: 0.3px;
+}
+
+.colofon-section p strong {
+    font-weight: 550;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+/* --- EFECTO DE APARICIÓN AL HACER SCROLL (SCROLL REVEAL) --- */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform, opacity;
+}
+
+.reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- SECUENCIA DE SALTO ARCOÍRIS (LETRAS INDIVIDUALES) --- */
+.rainbow-text span.jump-color {
+    animation-duration: 0.8s;
+    animation-timing-function: ease;
+}
+
+.rainbow-text span:nth-child(4n+1).jump-color { animation-name: jumpRed; }
+.rainbow-text span:nth-child(4n+2).jump-color { animation-name: jumpYellow; }
+.rainbow-text span:nth-child(4n+3).jump-color { animation-name: jumpBlue; }
+.rainbow-text span:nth-child(4n+4).jump-color { animation-name: jumpGreen; }
+
+@keyframes jumpRed {
+    0% { transform: translateY(0); color: #ffffff; }
+    25% { transform: translateY(-15px); color: var(--color-rojo); }
+    60% { transform: translateY(0); color: var(--color-rojo); }
+    100% { transform: translateY(0); color: #ffffff; }
+}
+@keyframes jumpYellow {
+    0% { transform: translateY(0); color: #ffffff; }
+    25% { transform: translateY(-15px); color: var(--color-amarillo); }
+    60% { transform: translateY(0); color: var(--color-amarillo); }
+    100% { transform: translateY(0); color: #ffffff; }
+}
+@keyframes jumpBlue {
+    0% { transform: translateY(0); color: #ffffff; }
+    25% { transform: translateY(-15px); color: var(--color-azul); }
+    60% { transform: translateY(0); color: var(--color-azul); }
+    100% { transform: translateY(0); color: #ffffff; }
+}
+@keyframes jumpGreen {
+    0% { transform: translateY(0); color: #ffffff; }
+    25% { transform: translateY(-15px); color: var(--color-verde); }
+    60% { transform: translateY(0); color: var(--color-verde); }
+    100% { transform: translateY(0); color: #ffffff; }
 }

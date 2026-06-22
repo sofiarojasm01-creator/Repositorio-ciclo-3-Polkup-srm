@@ -3,12 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Polkup - Laboratorio Experimental</title>
+    <title>Polkup - Página Experimental</title>
     
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="experimental.css">
 </head>
 <body>
+
+    <!-- Botón Global de Control de Sonido -->
+    <button id="sound-toggle" class="sound-toggle-btn muted">
+        <span class="sound-icon">🔇</span> <span class="sound-label">Activar Sonido</span>
+    </button>
 
     <section id="screen-menu" class="experimental-screen active">
         <a href="index.html" class="back-to-landing">← Volver al inicio</a>
@@ -31,26 +36,78 @@
         </div>
     </section>
 
+    <!-- PANTALLA 1: ANCLAR -->
     <section id="screen-ancla" class="experimental-screen">
         <button class="back-to-menu">← Volver al menú</button>
+        
+        <div class="instructions-overlay">
+            <p>Mueve el mouse cerca de los círculos para revelar el camino. Sigue la <strong>línea brújula</strong> y haz clic en el círculo objetivo activo.</p>
+        </div>
+
         <div class="canvas-fullscreen-container">
             <canvas id="canvasAncla"></canvas>
         </div>
     </section>
 
+    <!-- PANTALLA 2: ROTAR -->
     <section id="screen-rota" class="experimental-screen">
         <button class="back-to-menu">← Volver al menú</button>
+        
+        <!-- Panel de Control para Rotación -->
+        <div class="control-panel-rota">
+            <h3>Rotación de Secciones</h3>
+            <p>Haz clic en cualquier anillo para invertir su sentido de giro.</p>
+            <div class="slider-container">
+                <label for="speed-slider">Velocidad: <span id="speed-label">1.0x</span></label>
+                <input type="range" id="speed-slider" min="0.1" max="3" step="0.1" value="1">
+            </div>
+        </div>
+
         <div class="canvas-fullscreen-container">
             <canvas id="canvasRota"></canvas>
         </div>
     </section>
 
+    <!-- PANTALLA 3: LLEGA A LA CIMA -->
     <section id="screen-cima" class="experimental-screen">
         <button class="back-to-menu">← Volver al menú</button>
+        
+        <!-- Contador de Arcos Especiales -->
+        <div class="arch-counter-container">
+            <span class="counter-title">ARCOS COMPLETADOS</span>
+            <div class="counter-slots">
+                <div class="counter-slot" id="slot-0"></div>
+                <div class="counter-slot" id="slot-1"></div>
+                <div class="counter-slot" id="slot-2"></div>
+                <div class="counter-slot" id="slot-3"></div>
+                <div class="counter-slot" id="slot-4"></div>
+            </div>
+        </div>
+
+        <!-- Pantalla de Victoria / Cima Conquistada -->
+        <div id="summit-overlay" class="summit-overlay">
+            <div class="summit-modal">
+                <span class="summit-badge">¡FELICITACIONES!</span>
+                <h2>¡Llegaste a la Cima!</h2>
+                <p>Has superado los arcos de color negro y has alcanzado la cumbre de la torre Polkup.</p>
+                <button id="btn-restart-climb" class="restart-btn">Reiniciar Ascenso</button>
+            </div>
+        </div>
+
         <div class="canvas-fullscreen-container">
             <canvas id="canvasCima"></canvas>
         </div>
     </section>
+
+    <!-- Filtro SVG para el efecto pegajoso (Gooey) en la fusión de victoria -->
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="position: absolute; width: 0; height: 0; pointer-events: none;">
+        <defs>
+            <filter id="polkup-gooey">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="12" result="blur" />
+                <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 26 -9" />
+            </filter>
+        </defs>
+    </svg>
 
     <script src="interaction-engine.js"></script>
 </body>
