@@ -309,6 +309,22 @@ canvas {
     color: #666;
 }
 
+/* Forzar círculos de arcos en blanco al final (secuencia de victoria) */
+.victory-active .counter-slot.active {
+    border-color: #ffffff !important;
+    background: #ffffff !important;
+}
+.victory-active .counter-slot {
+    border-color: rgba(255, 255, 255, 0.3) !important;
+    background: transparent !important;
+}
+.victory-active .counter-title {
+    color: rgba(255, 255, 255, 0.5) !important;
+}
+.victory-active .back-to-menu {
+    display: none !important;
+}
+
 /* --- OVERLAY DE CIMA (VICTORIA) --- */
 .summit-overlay {
     position: fixed;
@@ -316,80 +332,72 @@ canvas {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(9, 8, 21, 0.35); /* Fondo oscuro semi-translúcido */
-    backdrop-filter: blur(4px); /* Difuminado premium */
-    -webkit-backdrop-filter: blur(4px);
+    background: transparent; /* Fondo completamente transparente para ver el canvas */
+    backdrop-filter: none; /* Sin difuminado de fondo */
+    -webkit-backdrop-filter: none;
     z-index: 200;
     display: flex;
     justify-content: center;
     align-items: center;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 1s ease;
+    transition: opacity 1.2s ease;
 }
 .summit-overlay.active {
     opacity: 1;
     pointer-events: auto;
 }
-.summit-modal {
+.summit-modal-clean {
     text-align: center;
-    max-width: 460px;
-    padding: 40px;
-    background: rgba(255, 255, 255, 0.95); /* Tarjeta blanca semi-opaca */
-    border-radius: 24px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
     display: flex;
-    flex-direction: column;
+    flex-direction: row; /* Botones uno al lado del otro */
+    gap: 25px;
     align-items: center;
-    gap: 20px;
+    justify-content: center;
+    position: absolute;
+    bottom: 80px; /* Posicionado al fondo sobre el canvas negro */
+    width: 100%;
+    max-width: 600px;
     transform: translateY(40px);
-    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity: 0;
+    transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1), opacity 1s ease;
 }
-.summit-overlay.active .summit-modal {
+.summit-overlay.active .summit-modal-clean {
     transform: translateY(0);
+    opacity: 1;
 }
-.summit-badge {
-    background: #0DB500;
-    color: #fff;
-    font-size: 0.75rem;
-    font-weight: 800;
-    padding: 6px 16px;
-    border-radius: 20px;
-    letter-spacing: 2px;
-}
-.summit-modal h2 {
-    font-family: 'Bauhaus 93', 'Arial Black', sans-serif;
-    font-size: 3rem;
-    color: #1A1A1A;
-    line-height: 1.1;
-    margin: 0;
-}
-.summit-modal p {
-    font-size: 1rem;
-    color: #666;
-    line-height: 1.6;
-    margin: 0;
-}
-.restart-btn {
-    background: #1A1A1A;
-    color: #fff;
-    border: none;
-    padding: 15px 30px;
+.victory-btn {
+    background: rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+    border: 1.5px solid rgba(255, 255, 255, 0.20);
+    padding: 14px 32px;
     font-family: 'Poppins', sans-serif;
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: 600;
     border-radius: 30px;
     cursor: pointer;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
 }
-.restart-btn:hover {
-    background: #3329ED;
-    transform: scale(1.05);
-    box-shadow: 0 8px 25px rgba(51, 41, 237, 0.3);
+.victory-btn:hover {
+    background: #ffffff;
+    color: #000000;
+    border-color: #ffffff;
+    transform: scale(1.05) translateY(-2px);
+    box-shadow: 0 15px 35px rgba(255, 255, 255, 0.2);
+}
+.victory-btn.secondary {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.85);
+}
+.victory-btn.secondary:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.35);
+    box-shadow: 0 15px 30px rgba(255, 255, 255, 0.08);
 }
 
 /* Soporte para tema invertido del Canvas */

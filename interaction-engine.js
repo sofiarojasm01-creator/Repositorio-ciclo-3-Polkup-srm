@@ -1,6 +1,17 @@
 // Paleta de colores PolkUp
 const polkupColors = ['#EC2828', '#EDC217', '#3329ED', '#0DB500'];
 
+// Helper para interpolar un color hexadecimal a negro
+function lerpColorToBlack(hexColor, progress) {
+    let r = parseInt(hexColor.slice(1, 3), 16);
+    let g = parseInt(hexColor.slice(3, 5), 16);
+    let b = parseInt(hexColor.slice(5, 7), 16);
+    let nr = Math.round(r * (1 - progress));
+    let ng = Math.round(g * (1 - progress));
+    let nb = Math.round(b * (1 - progress));
+    return `rgb(${nr}, ${ng}, ${nb})`;
+}
+
 /* ====================================================
    SISTEMA DE AUDIO DIGITAL (Web Audio API)
    ==================================================== */
@@ -798,9 +809,9 @@ function initCimaGame() {
     
     // Configuración de la mecánica de ascenso a la cima
     let clickedArchesCount = 0;
-    const maxRequiredArches = 5;
+    const maxRequiredArches = 7;
     let isSummitReached = false;
-    let victoryAnimationStage = 0; // 0 = normal, 1 = vortex, 2 = collapse, 3 = expand, 4 = summit
+    let victoryAnimationStage = 0; // 0 = normal, 1 = separate, 2 = collapse, 3 = expand, 4 = summit
     let victoryTimer = 0;
     
     let stars = [];
@@ -841,8 +852,8 @@ function initCimaGame() {
         elements.forEach(el => {
             if (el.z < 500 && el.hasStroke && currentSpeed > 0.1) {
                 const dist = Math.hypot(mouseX - el.screenX, mouseY - el.screenY);
-                // Damos un rango extra de holgura para facilitar el clic en círculos móviles
-                if (dist < el.screenRadius + 15) {
+                // Damos un rango extra de holgura para facilitar el clic en círculos móviles (reducido para dificultad)
+                if (dist < el.screenRadius + 6) {
                     // Sonido whoosh
                     audio.playWhooshSound();
                     
@@ -882,6 +893,19 @@ function initCimaGame() {
         });
     }
 
+    // Conectar el botón de volver al menú en victoria
+    const backMenuVictoryBtn = document.getElementById('btn-back-menu-victory');
+    if (backMenuVictoryBtn) {
+        backMenuVictoryBtn.addEventListener('click', () => {
+            resetCimaGame();
+            const overlay = document.getElementById('summit-overlay');
+            if (overlay) {
+                overlay.classList.remove('active');
+            }
+            switchScreen('screen-menu');
+        });
+    }
+
     // --- GENERACIÓN DE PARTÍCULAS POR TODA LA PANTALLA ---
     function generateParticles() {
         elements = [];
@@ -897,7 +921,7 @@ function initCimaGame() {
                 z: ratio * 600, 
                 spread: spreadFactor,
                 color: polkupColors[Math.floor(Math.random() * polkupColors.length)],
-                hasStroke: Math.random() < 0.20, // 20% de círculos son arcos clickables
+                hasStroke: Math.random() < 0.10, // 10% de círculos son arcos clickables (menos arcos para dificultad)
                 screenX: 0,
                 screenY: 0,
                 screenRadius: 0
@@ -947,6 +971,9 @@ function initCimaGame() {
         victoryTimer = 0;
         mouseInCenter = false;
         
+        const canvasContainer = canvas.parentElement.parentElement;
+        canvasContainer.classList.add('victory-active');
+        
         // Inicializar ángulos de rotación 3D para el modelo de la cima
         targetRotX = -0.3;
         targetRotY = 0;
@@ -989,6 +1016,7 @@ function initCimaGame() {
         projectionCenterX = canvas.width / 2;
         
         canvas.style.filter = 'none'; // Limpiar filtros de victoria
+        ctx.filter = 'none';
         
         audio.stopSummitChord();
         audio.startWindSound();
@@ -998,6 +1026,7 @@ function initCimaGame() {
         
         const canvasContainer = canvas.parentElement.parentElement;
         canvasContainer.classList.remove('inverted-theme');
+        canvasContainer.classList.remove('victory-active');
     };
 
     // --- RENDERIZADO DEL ESCENARIO DE LA CIMA ---
@@ -1007,10 +1036,15 @@ function initCimaGame() {
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
         // --- DIBUJAR PLATO CIRCULAR DE LA CIMA (Círculo con orificio central) ---
+        // Palpitación lenta y sutil
+        const basePlateR = 55;
+        const baseHoleR = 12;
+        const pulse = Math.sin(victoryTimer * 0.035) * 1.2;
+        
         const plateX = centerX;
-        const plateY = centerY + 40;
-        const plateR = 55;
-        const holeR = 12;
+        const plateY = centerY; // Centrado en la pantalla
+        const plateR = basePlateR + pulse;
+        const holeR = baseHoleR + pulse * 0.2;
 
         // Gradiente metálico oscuro/grisáceo para el plato
         let plateGrad = ctx.createLinearGradient(plateX - plateR, plateY - plateR, plateX + plateR, plateY + plateR);
@@ -1049,124 +1083,6 @@ function initCimaGame() {
         ctx.strokeStyle = '#2d2d33';
         ctx.lineWidth = 2.0;
         ctx.stroke();
-
-        // --- ANIMACIÓN Y DIBUJO DE LA BANDERA ---
-        // La bandera aparece en el frame 60 y se inserta completamente en el frame 120
-        let flagAlpha = 0;
-        let flagY = centerY - 100; // Posición final Y del asta en la cima
-        if (victoryTimer >= 60) {
-            const flagT = Math.min(1, (victoryTimer - 60) / 60);
-            const easeOutCubic = 1 - Math.pow(1 - flagT, 3);
-            flagAlpha = flagT;
-            // Desciende desde 120px arriba de su posición final
-            flagY = (centerY + 30) - 120 * (1 - easeOutCubic);
-        }
-
-        if (flagAlpha > 0) {
-            ctx.save();
-            ctx.globalAlpha = flagAlpha;
-
-            // Asta de la bandera (pole)
-            const poleBottomX = plateX;
-            const poleBottomY = flagY;
-            const poleTopY = flagY - 130;
-
-            // Dibujar el asta
-            let poleGrad = ctx.createLinearGradient(poleBottomX - 2, 0, poleBottomX + 2, 0);
-            poleGrad.addColorStop(0, '#e0e0e0');
-            poleGrad.addColorStop(0.5, '#ffffff');
-            poleGrad.addColorStop(1, '#9e9e9e');
-
-            ctx.lineWidth = 4;
-            ctx.strokeStyle = poleGrad;
-            ctx.beginPath();
-            ctx.moveTo(poleBottomX, poleBottomY);
-            ctx.lineTo(poleBottomX, poleTopY);
-            ctx.stroke();
-
-            // Pequeña esfera dorada en la punta del asta
-            ctx.beginPath();
-            ctx.arc(poleBottomX, poleTopY, 5, 0, Math.PI * 2);
-            ctx.fillStyle = '#D4AF37';
-            ctx.fill();
-            ctx.strokeStyle = '#855f05';
-            ctx.lineWidth = 1;
-            ctx.stroke();
-
-            // Dibujar la Bandera dorada ondeante
-            const flagWidth = 55;
-            const flagHeight = 40;
-            const startY = poleTopY + 10;
-
-            let flagColorStart, flagColorEnd;
-            switch (lastClickedColor) {
-                case '#EC2828': // Rojo
-                    flagColorStart = '#ff5c5c';
-                    flagColorEnd = '#9e1414';
-                    break;
-                case '#EDC217': // Amarillo
-                    flagColorStart = '#FFFDD0';
-                    flagColorEnd = '#AA7C11';
-                    break;
-                case '#3329ED': // Azul
-                    flagColorStart = '#756cff';
-                    flagColorEnd = '#1d13b3';
-                    break;
-                case '#0DB500': // Verde
-                    flagColorStart = '#54e048';
-                    flagColorEnd = '#077d00';
-                    break;
-                default: // Dorado/Oro por defecto
-                    flagColorStart = '#FFFDD0';
-                    flagColorEnd = '#AA7C11';
-            }
-
-            let dynamicGrad = ctx.createLinearGradient(poleBottomX, startY, poleBottomX + flagWidth, startY);
-            dynamicGrad.addColorStop(0, flagColorStart);
-            dynamicGrad.addColorStop(0.5, lastClickedColor);
-            dynamicGrad.addColorStop(1, flagColorEnd);
-
-            ctx.fillStyle = dynamicGrad;
-            ctx.strokeStyle = '#1a1a1a';
-            ctx.lineWidth = 1.5;
-
-            ctx.beginPath();
-            ctx.moveTo(poleBottomX, startY);
-
-            // Borde superior de la bandera (onda sinusoidal)
-            const time = Date.now() * 0.006;
-            for (let xOffset = 0; xOffset <= flagWidth; xOffset += 4) {
-                const yWave = Math.sin(time + (xOffset * 0.08)) * 3.5;
-                ctx.lineTo(poleBottomX + xOffset, startY + yWave);
-            }
-
-            // Borde derecho de la bandera
-            const rightWave = Math.sin(time + (flagWidth * 0.08)) * 3.5;
-            ctx.lineTo(poleBottomX + flagWidth, startY + flagHeight + rightWave);
-
-            // Borde inferior de la bandera (onda sinusoidal de regreso al asta)
-            for (let xOffset = flagWidth; xOffset >= 0; xOffset -= 4) {
-                const yWave = Math.sin(time + (xOffset * 0.08)) * 3.5;
-                ctx.lineTo(poleBottomX + xOffset, startY + flagHeight + yWave);
-            }
-
-            ctx.closePath();
-            ctx.fill();
-            ctx.stroke();
-
-            // Sombra/Brillo en la costura de la bandera
-            ctx.strokeStyle = 'rgba(255, 255, 255, 0.25)';
-            ctx.lineWidth = 1.0;
-            ctx.beginPath();
-            ctx.moveTo(poleBottomX + 2, startY + 2);
-            for (let xOffset = 2; xOffset <= flagWidth - 2; xOffset += 4) {
-                const yWave = Math.sin(time + (xOffset * 0.08)) * 3.5;
-                ctx.lineTo(poleBottomX + xOffset, startY + 2 + yWave);
-            }
-            ctx.stroke();
-
-            ctx.restore();
-        }
     }
 
     // --- CICLO RENDERIZADO PRINCIPAL ---
@@ -1195,13 +1111,12 @@ function initCimaGame() {
                 targetRotX = -0.3;
             }
 
-            // Interpolación de rotación 3D suave (LERP)
-            rotX += (targetRotX - rotX) * 0.06;
-            rotY += (targetRotY - rotY) * 0.06;
+            // Interpolación de rotación 3D suave (LERP) - Más fluido con factor 0.12
+            rotX += (targetRotX - rotX) * 0.12;
+            rotY += (targetRotY - rotY) * 0.12;
 
             // Dibujar la escena pasándole el centro de proyección actual
             drawSummitScene(projectionCenterX, canvas.height / 2);
-
             // Activar el modal de felicitaciones recién en el frame 300 (~5 segundos)
             if (victoryTimer === 300) {
                 const overlay = document.getElementById('summit-overlay');
@@ -1232,116 +1147,130 @@ function initCimaGame() {
             const centerY = canvas.height / 2;
             
             if (victoryAnimationStage === 1) {
-                // FASE 1: CONSOLIDACIÓN EN EL CENTRO Y GIRO (3 segundos)
-                const t = Math.min(1, victoryTimer / 180);
-                const rotTime = (victoryTimer * 0.012); // Giro inicial lento y controlado
+                // FASE 1: 4 CÍRCULOS GRANDES SE SEPARAN Y GIRAN (1.25 segundos)
+                const t = Math.min(1, victoryTimer / 75);
+                const rotTime = (victoryTimer * 0.08); // Giro constante y rápido
                 
-                // Función de easing cubic ease-in-out para una aceleración/desaceleración súper fluida
+                // Función de easing cubic ease-in-out
                 const easeInOutCubic = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
                 
-                // Asegurar interpolación a la orientación base de la torre
-                rotX += (targetRotX - rotX) * 0.06;
-                rotY += (targetRotY - rotY) * 0.06;
+                // Asegurar interpolación a la orientación base
+                rotX += (targetRotX - rotX) * 0.12;
+                rotY += (targetRotY - rotY) * 0.12;
 
-                elements.forEach((el, index) => {
-                    const colorIdx = polkupColors.indexOf(el.color);
+                // Desvanecer las partículas del túnel al inicio de la Fase 1
+                if (victoryTimer < 20) {
+                    const tunnelOpacity = 1 - (victoryTimer / 20);
+                    ctx.globalAlpha = tunnelOpacity;
                     
-                    // Posicionamos los grupos en el centro de la pantalla
-                    const baseAngle = -3 * Math.PI / 4 + colorIdx * (Math.PI / 2);
-                    const targetAngle = baseAngle + rotTime;
-                    const targetRadius = 20; // Giro concentrado en el centro
+                    elements.forEach(el => {
+                        const perspectiveFactor = 200 / Math.max(1, el.z);
+                        const screenX = centerX + Math.cos(el.angle) * el.spread * perspectiveFactor;
+                        const screenY = centerY + Math.sin(el.angle) * el.spread * perspectiveFactor;
+                        const radius = Math.max(1, (600 - el.z) * 0.042 * perspectiveFactor);
+                        
+                        ctx.beginPath();
+                        ctx.arc(screenX, screenY, radius, 0, Math.PI * 2);
+                        ctx.fillStyle = el.color;
+                        ctx.fill();
+                    });
+                    ctx.globalAlpha = 1.0;
+                }
+
+                // Dibujar los 4 círculos grandes fusionándose con el filtro pegajoso
+                ctx.filter = 'url(#polkup-gooey)';
+                
+                polkupColors.forEach((color, idx) => {
+                    const baseAngle = idx * (Math.PI / 2);
+                    const angle = baseAngle + rotTime;
+                    const spread = 110 * easeInOutCubic; // Se separan hasta 110px
                     
-                    if (el.startAngle === undefined) el.startAngle = el.angle;
-                    if (el.startSpread === undefined) el.startSpread = el.spread;
-                    if (el.startZ === undefined) el.startZ = el.z;
-                    
-                    const spinAngle = el.startAngle + rotTime;
-                    
-                    el.angle = spinAngle * (1 - easeInOutCubic) + targetAngle * easeInOutCubic;
-                    el.spread = el.startSpread * (1 - easeInOutCubic) + targetRadius * easeInOutCubic;
-                    el.z = el.startZ * (1 - easeInOutCubic) + 200 * easeInOutCubic;
-                    
-                    const perspectiveFactor = 200 / Math.max(1, el.z);
-                    el.screenX = centerX + Math.cos(el.angle) * el.spread * perspectiveFactor;
-                    el.screenY = centerY + Math.sin(el.angle) * el.spread * perspectiveFactor;
-                    
-                    const originalRadius = Math.max(1, (600 - el.z) * 0.042 * perspectiveFactor);
-                    const currentRadius = originalRadius * (1 - t) + 28 * t;
+                    const screenX = centerX + Math.cos(angle) * spread;
+                    const screenY = centerY + Math.sin(angle) * spread;
+                    const radius = 45; // Círculos grandes para ver la fusión
                     
                     ctx.beginPath();
-                    ctx.arc(el.screenX, el.screenY, currentRadius, 0, Math.PI * 2);
-                    ctx.fillStyle = el.color; // Sin bordes ni contornos
+                    ctx.arc(screenX, screenY, radius, 0, Math.PI * 2);
+                    ctx.fillStyle = color;
                     ctx.fill();
                 });
                 
-                if (victoryTimer >= 180) {
+                ctx.filter = 'none';
+                
+                if (victoryTimer >= 75) {
                     victoryAnimationStage = 2;
                     victoryTimer = 0;
                 }
             }
             else if (victoryAnimationStage === 2) {
-                // FASE 2: COLAPSO Y MEZCLA RÁPIDA EN EL CENTRO (2.5 segundos)
-                const t = Math.min(1, victoryTimer / 150);
+                // FASE 2: COLAPSO ACELERADO AL CENTRO, GIRO UNIDO Y LLEGADA AL NEGRO (1.25 segundos)
+                const t = Math.min(1, victoryTimer / 75);
                 
-                if (t < 0.45) {
-                    canvas.style.filter = 'url(#polkup-gooey)';
-                } else if (t < 0.90) {
-                    const blurAmount = ((t - 0.45) / 0.45) * 16; // De 0px a 16px de blur
-                    canvas.style.filter = `blur(${blurAmount}px)`;
+                // Efecto gooey de fusión líquida y difuminado final
+                if (t < 0.7) {
+                    ctx.filter = 'url(#polkup-gooey)';
+                } else if (t < 0.95) {
+                    const blurAmount = ((t - 0.7) / 0.25) * 16;
+                    ctx.filter = `blur(${blurAmount}px)`;
                 } else {
-                    canvas.style.filter = 'none';
+                    ctx.filter = 'none';
                 }
                 
-                const currCenterX = centerX;
-                const currCenterY = centerY;
-                
-                rotX += (targetRotX - rotX) * 0.06;
-                rotY += (targetRotY - rotY) * 0.06;
+                rotX += (targetRotX - rotX) * 0.12;
+                rotY += (targetRotY - rotY) * 0.12;
 
-                elements.forEach((el, index) => {
-                    el.angle += 0.05 + t * 0.28; 
-                    el.spread *= 0.955; // Se contraen hacia el centro
-                    el.z = el.z * (1 - 0.05) + 200 * 0.05;
+                const rotTime2 = 6.0 + victoryTimer * 0.08 + (t * t * 18.0); // Giro continuo acelerado
+                const easeCollapse = 1 - Math.pow(1 - t, 3.5); // Colapso exponencial rápido al centro
+
+                polkupColors.forEach((color, idx) => {
+                    const baseAngle = idx * (Math.PI / 2);
+                    const angle = baseAngle + rotTime2;
+                    const spread = 110 * (1 - easeCollapse);
                     
-                    const perspectiveFactor = 200 / Math.max(1, el.z);
-                    el.screenX = currCenterX + Math.cos(el.angle) * el.spread * perspectiveFactor;
-                    el.screenY = currCenterY + Math.sin(el.angle) * el.spread * perspectiveFactor;
+                    const screenX = centerX + Math.cos(angle) * spread;
+                    const screenY = centerY + Math.sin(angle) * spread;
+                    const radius = 45 * (1 - easeCollapse * 0.15); // Reducción sutil
                     
-                    const currentRadius = 28 * (1 - t * 0.3);
+                    // Interpolar el color del círculo hacia negro puro
+                    const currentColor = lerpColorToBlack(color, t);
                     
                     ctx.beginPath();
-                    ctx.arc(el.screenX, el.screenY, currentRadius, 0, Math.PI * 2);
-                    ctx.fillStyle = el.color;
+                    ctx.arc(screenX, screenY, radius, 0, Math.PI * 2);
+                    ctx.fillStyle = currentColor;
                     ctx.fill();
                 });
                 
-                if (victoryTimer >= 150) {
+                // Limpiar el filtro después de dibujar las partículas de esta fase
+                ctx.filter = 'none';
+                
+                if (victoryTimer >= 75) {
                     canvas.style.filter = 'none';
+                    ctx.filter = 'none';
                     victoryAnimationStage = 3;
                     victoryTimer = 0;
                 }
             }
             else if (victoryAnimationStage === 3) {
-                // FASE 3: EL CÍRCULO NEGRO (#000000) SE EXPANDE FLUIDAMENTE A TODA LA PANTALLA (1.5s)
-                const t = victoryTimer / 90; 
+                // FASE 3: EL CÍRCULO NEGRO (#000000) SE EXPANDE RÁPIDAMENTE (0.75 segundos)
+                const t = victoryTimer / 45; 
                 const maxRadius = Math.hypot(canvas.width, canvas.height);
-                const currentRadius = 15 + Math.pow(t, 3.5) * maxRadius;
+                const currentRadius = 38 + Math.pow(t, 3.5) * maxRadius; // Empieza en 38 para coincidir con el blob final de la fase 2
                 
-                rotX += (targetRotX - rotX) * 0.06;
-                rotY += (targetRotY - rotY) * 0.06;
+                rotX += (targetRotX - rotX) * 0.12;
+                rotY += (targetRotY - rotY) * 0.12;
 
                 ctx.fillStyle = '#000000';
                 ctx.beginPath();
                 ctx.arc(centerX, centerY, currentRadius, 0, Math.PI * 2);
                 ctx.fill();
                 
-                if (victoryTimer >= 90) {
+                if (victoryTimer >= 45) {
                     victoryAnimationStage = 4;
                     victoryTimer = 0;
                     isSummitReached = true;
                 }
             }
-            
+
             requestAnimationFrame(render);
             return;
         }
@@ -1392,7 +1321,7 @@ function initCimaGame() {
                 el.z = 600 + Math.random() * 40;
                 el.angle = Math.random() * Math.PI * 2;
                 el.spread = 35 + Math.random() * 480;
-                el.hasStroke = Math.random() < 0.20;
+                el.hasStroke = Math.random() < 0.10;
             }
 
             const perspectiveFactor = 200 / el.z;
